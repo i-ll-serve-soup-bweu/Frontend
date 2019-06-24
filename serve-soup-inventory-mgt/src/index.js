@@ -7,6 +7,7 @@ import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 
 import combinedReducers from './reducers';
+import App from './App';
 
 const store = createStore(
   combinedReducers,
