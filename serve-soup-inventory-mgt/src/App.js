@@ -1,9 +1,12 @@
 import React from 'react';
-import './App.css';
+import GenericHeader from './components/atoms/Heading'
 
 function App() {
   return (
+    <>
     <div>Serve Soup!</div>
+    <GenericHeader fontSize='80px' color='black'>Sign In</GenericHeader>
+    </>
   );
 }
 
