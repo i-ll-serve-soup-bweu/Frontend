@@ -6,6 +6,7 @@ const initialState = {
   inventory: [],
   loadingUser: false,
   loadingInventory: false,
+  loadingKitchen: false,
   error: '',
 }
 
@@ -15,6 +16,25 @@ export function inventoryReducer(state= initialState, action) {
       return { ...state, inventory: action.payload };
     case (types.LOADING_INVENTORY):
       return { ...state, loadingInventory: action.payload };
+    case (types.ERROR):
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+export function userReducer(state=initialState, action) {
+  switch(action.type) {
+    case (types.LOGIN):
+      return { ...state, user: action.payload };
+    case (types.LOGOUT):
+      return {};
+    case (types.LOADING_USER):
+      return { ...state, loadingUser: action.payload };
+    case (types.GET_KITCHEN):
+      return { ...state, kitchen: action.payload };
+    case (types.LOADING_KITCHEN):
+      return { ...state, loadingKitchen: action.payload };
     case (types.ERROR):
       return { ...state, error: action.payload };
     default:
