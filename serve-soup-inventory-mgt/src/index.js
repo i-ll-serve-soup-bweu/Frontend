@@ -1,4 +1,5 @@
 import React from 'react';
+import App from './App';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
@@ -9,6 +10,7 @@ import combinedReducers from './reducers';
 
 const store = createStore(
   combinedReducers,
+  {},
   compose(
     applyMiddleware(thunk, logger),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
