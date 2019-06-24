@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 import * as types from '../actions';
 
 const initialState = {
@@ -41,6 +43,11 @@ export function userReducer(state=initialState, action) {
       return state;
   }
 }
+
+export default combineReducers({
+  user: userReducer,
+  inventory: inventoryReducer,
+});
 
 /* 
 
