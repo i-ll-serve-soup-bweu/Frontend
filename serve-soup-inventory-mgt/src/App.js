@@ -1,23 +1,69 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import pt from 'prop-types';
 
 import LoginForm from './components/organisms/LoginForm';
 import SignUpForm from './components/organisms/SignUpForm';
+import Header from './components/templates/Header';
+import InventoryGrid from './components/pages/InventoryGrid';
+import InventoryItemDetails from './components/pages/InventoryItemDetails';
+import InventoryItemForm from './components/pages/InventoryItemForm';
 
 function App() {
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props => (localStorage.getItem('soupUserToken') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/login" />
+      ))
+        }
+    />
+  );
+
+  PrivateRoute.propTypes = {
+    component: pt.func.isRequired,
+  };
 
   return (
     <Router>
-      <Route 
+      <Header />
+      <Route
         exact
-        path='/login'
+        path="/login"
         component={LoginForm}
       />
-      <Route 
+      <Route
         exact
-        path='/signup'
+        path="/signup"
         component={SignUpForm}
       />
+
+      <PrivateRoute
+        exact
+        path={['/', '/inventory']}
+        component={InventoryGrid}
+      />
+
+      <PrivateRoute
+        exact
+        path="/inventory/:id"
+        component={InventoryItemDetails}
+      />
+
+      <PrivateRoute
+        exact
+        path="/inventory/add-item"
+        component={InventoryItemForm}
+      />
+
+      <PrivateRoute
+        exact
+        path="/inventory/:id/edit-item"
+        component={InventoryItemForm}
+      />
+
     </Router>
   );
 }
