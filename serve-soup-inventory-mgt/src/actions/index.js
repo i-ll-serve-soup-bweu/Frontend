@@ -53,6 +53,7 @@ export const doLogIn = (user, history) => (dispatch) => {
       dispatch(signUpOrLogIn(response));
       dispatch(genericAction(LOGIN, user));
       localStorage.setItem('soupUserToken', response.data.token);
+      localStorage.setItem('soupUserID', userID);
       history.push('/');
     })
     .catch((error) => {
@@ -81,8 +82,14 @@ export const doLogOut = () => (dispach) => {
 
 export const doGetKitchen = () => (dispatch) => {
   dispatch(genericAction(LOADING_KITCHEN, true));
+  const userID = localStorage.getItem('soupUserID');
   axiosWithToken().get(`${SoupApiURL}/kitchen`)
-    .then(response => dispatch(getKitchen(response.data)))
+    .then((response) => {
+      if (response.data[0] && userID) {
+        const kitchen = response.data.filter(kitchen => Number(kitchen.id) === Number(userID))[0];
+        dispatch(getKitchen(kitchen));
+      }
+    })
     .catch(error => dispatch(genericAction(ERROR, error.message)))
     .finally(() => dispatch(genericAction(LOADING_KITCHEN, false)));
 };
