@@ -34,15 +34,16 @@ const CreateKitchenForm = ({
   const website = React.createRef();
   const mission = React.createRef();
 
-  const signUp = (event) => {
-    event.preventDefault();
-    const user = {
-      kitchenName: kitchenName.current.value,
-      location: location.current.value,
-      website: website.current.value,
-      mission: mission.current.value,
-    };
-  };
+  // change this to add kitchen action/method
+  // const signUp = (event) => {
+  //   event.preventDefault();
+  //   const user = {
+  //     kitchenName: kitchenName.current.value,
+  //     location: location.current.value,
+  //     website: website.current.value,
+  //     mission: mission.current.value,
+  //   };
+  // };
 
   return (
     <Outer>
