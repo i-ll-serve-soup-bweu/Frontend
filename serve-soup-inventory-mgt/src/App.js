@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import pt from 'prop-types';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import PrivateRoute from './components/PrivateRoute';
 import LoginForm from './components/organisms/LoginForm';
 import SignUpForm from './components/organisms/SignUpForm';
 import Header from './components/templates/Header';
@@ -10,22 +10,6 @@ import InventoryItemDetails from './components/pages/InventoryItemDetails';
 import InventoryItemForm from './components/pages/InventoryItemForm';
 
 function App() {
-  const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props => (localStorage.getItem('soupUserToken') ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      ))
-        }
-    />
-  );
-
-  PrivateRoute.propTypes = {
-    component: pt.func.isRequired,
-  };
-
   return (
     <Router>
       <Header />
