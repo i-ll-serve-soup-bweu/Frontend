@@ -45,7 +45,13 @@ export const doLogIn = (user, history) => (dispatch) => {
   const { username, password } = user;
   axios.post(`${SoupApiURL}/login`, { username, password })
     .then((response) => {
+      const { username, userID } = response.data;
+      const user = {
+        username,
+        userID,
+      };
       dispatch(signUpOrLogIn(response));
+      dispatch(genericAction(LOGIN, user));
       localStorage.setItem('soupUserToken', response.data.token);
       history.push('/');
     })
