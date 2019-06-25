@@ -1,12 +1,11 @@
 import React from 'react';
-import GenericHeader from '../../atoms/Heading';
+
+import { InventoryItemForm } from '../../organisms'; 
 
 export default function InventoryItemDetails() {
   return (
     <div>
-      <GenericHeader>
-        Inventory Item Details
-      </GenericHeader>
+      <InventoryItemForm />
     </div>
   );
 }
