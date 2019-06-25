@@ -1,18 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { doSignUp } from '../../../actions';
-import GenericHeader from '../../atoms/Heading';
-import Input from '../../atoms/Input';
-import Button from '../../atoms/Button'; 
+import { StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput } from '../../atoms';
 
-export function SignUpForm (props){
+const Outer = styled.div`
+  width: 55%;
+  margin: 0 auto;
+`;
+
+const Inner = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SignUpForm = (props) => {
   const emailRef = React.createRef();
   const passRef = React.createRef();
   const nameRef = React.createRef();
   const lastNameRef = React.createRef();
 
-  const doSignUp = () => {
+  const doSignUp = event => {
+    event.preventDefault();
     const user = {
       name: nameRef.current.value,
       lastName: lastNameRef.current.value,
@@ -22,28 +39,50 @@ export function SignUpForm (props){
     }
     props.doSignUp(user, props.history);
   }
-  if (props.loadingUser) 
-  return (
-    <p>Signing up</p>
-  )
-
-  if (props.error) 
-  return (
-    <>
-      <p>{props.error}</p>
-      <Button>Try Again</Button>
-    </>
-  )
 
   return (
-    <div>
-      <GenericHeader fontSize={80} color='black'>Sign Up</GenericHeader>
-      <Input placeholder='First Name' ref={nameRef}/>
-      <Input placeholder='Last Name' ref={lastNameRef}/>
-      <Input type='email' placeholder='Email Address' ref={emailRef}/>
-      <Input type='password' placeholder='Password' ref={passRef}/> 
-      <Button onClick={doSignUp}>Sign Up</Button>
-    </div>
+    <Outer>
+      <StyledRegisterCard>
+        <Inner>
+          <StyledHeading>Join</StyledHeading>
+          <HorizontalBar width='90%' />
+          <Form>
+            <StyledInput
+              register
+              placeholder='First Name'
+              ref={nameRef}
+            />
+            <StyledInput
+              register
+              placeholder='Last Name'
+              ref={lastNameRef}
+            />
+            <StyledInput
+              register
+              placeholder='Email'
+              ref={emailRef}
+            />
+            <StyledInput
+              register
+              placeholder='Confirm Email'
+              ref={lastNameRef}
+            />
+            <StyledInput
+              register
+              placeholder='Password'
+              type='password'
+              ref={passRef}
+            />
+            <StyledButton
+              primary
+              onClick={(event) => doSignUp(event)}
+            >
+              Sign Up
+            </StyledButton>
+          </Form>
+        </Inner>
+      </StyledRegisterCard>
+    </Outer>
   )
 }
 
