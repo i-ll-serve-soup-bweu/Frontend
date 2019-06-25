@@ -10,10 +10,10 @@ const initialState = {
   loadingInventory: false,
   loadingKitchen: false,
   error: '',
-}
+};
 
-export function inventoryReducer(state= initialState, action) {
-  switch(action.type) {
+export function inventoryReducer(state = initialState, action) {
+  switch (action.type) {
     case (types.GET_INVENTORY):
       return { ...state, inventory: action.payload };
     case (types.LOADING_INVENTORY):
@@ -25,8 +25,8 @@ export function inventoryReducer(state= initialState, action) {
   }
 }
 
-export function userReducer(state=initialState, action) {
-  switch(action.type) {
+export function userReducer(state = initialState, action) {
+  switch (action.type) {
     case (types.LOGIN):
       return { ...state, user: action.payload };
     case (types.LOGOUT):
@@ -49,7 +49,7 @@ export default combineReducers({
   inventory: inventoryReducer,
 });
 
-/* 
+/*
 
 initialState = {
   kitchen = {

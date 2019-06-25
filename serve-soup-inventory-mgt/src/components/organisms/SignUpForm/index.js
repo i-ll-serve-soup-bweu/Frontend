@@ -35,9 +35,14 @@ const SignUpForm = (props) => {
       lastName: lastNameRef.current.value,
       username: emailRef.current.value,
       password: passRef.current.value,
-      type: 'manager'
-    }
-    props.doSignUp(user, props.history);
+      type: 'manager',
+    };
+    doSignUp(user, history);
+  };
+  if (loadingUser) {
+    return (
+      <p>Signing up</p>
+    );
   }
 
   return (
@@ -86,11 +91,16 @@ const SignUpForm = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    loadingUser: state.user.loadingUser,
-    error: state.user.error
-  }
-}
+const mapStateToProps = state => ({
+  loadingUser: state.user.loadingUser,
+  error: state.user.error,
+});
 
-export default connect(mapStateToProps, { doSignUp })(SignUpForm)
+export default connect(mapStateToProps, { doSignUp })(SignUpForm);
+
+SignUpForm.propTypes = {
+  doSignUp: pt.func.isRequired,
+  loadingUser: pt.bool.isRequired,
+  error: pt.string.isRequired,
+  history: pt.shape(historyPropTypes).isRequired,
+};
