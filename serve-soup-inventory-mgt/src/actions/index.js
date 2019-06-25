@@ -11,57 +11,59 @@ export const LOADING_INVENTORY = 'LOADING_INVENTORY';
 export const LOADING_KITCHEN = 'LOADING_KITCHEN';
 export const ERROR = 'ERROR';
 
-export const signUpOrLogIn = (user) => {
-  return {
-    type: LOGIN,
-    payload: user,
-  }
-}
+export const signUpOrLogIn = user => ({
+  type: LOGIN,
+  payload: user,
+});
 
-export const logOut = () => {
-  return {
-    type: LOGOUT,
-  }
-}
+export const logOut = () => ({
+  type: LOGOUT,
+});
 
-export const getInventory = (inventory) => {
-  return {
-    type: GET_INVENTORY,
-    payload: inventory,
-  }
-}
+export const getInventory = inventory => ({
+  type: GET_INVENTORY,
+  payload: inventory,
+});
 
-export const getKitchen = (kitchen) => {
-  return {
-    type: GET_KITCHEN,
-    payload: kitchen,
-  }
-}
+export const getKitchen = kitchen => ({
+  type: GET_KITCHEN,
+  payload: kitchen,
+});
 
-export const genericAction = (type, payload) => {
-  return {
-    type,
-    payload,
-  }
-}
+export const genericAction = (type, payload) => ({
+  type,
+  payload,
+});
 
-export const doSignUp = (user) => dispatch => {
-  dispatch(genericAction(LOADING_USER, true));
-  const { username, password, name, lastName, type } = user;
-  axios.post(`${SoupApiURL}/register`, {username, password, name, lastName, type})
-    .then(() => dispatch(doLogIn(user)))
-    .catch(error => dispatch(genericAction(ERROR, error.message)))
-    .finally(() => dispatch(genericAction(LOADING_USER, false)))
-}
-
-export const doLogIn = (user) => dispatch => {
+export const doLogIn = (user, history) => (dispatch) => {
   dispatch(genericAction(LOADING_USER, true));
   const { username, password } = user;
-  axios.post(`${SoupApiURL}/login`, {username, password})
-    .then(response => {
-      dispatch(signUpOrLogIn(response))
-      localStorage.setItem('soupUserToken', response.token)
+  axios.post(`${SoupApiURL}/login`, { username, password })
+    .then((response) => {
+      dispatch(signUpOrLogIn(response));
+      localStorage.setItem('soupUserToken', response.data.token);
+      history.push('/');
     })
+    .catch((error) => {
+      dispatch(genericAction(ERROR, error.message));
+    })
+    .finally(() => dispatch(genericAction(LOADING_USER, false)));
+};
+
+export const doSignUp = (user, history) => (dispatch) => {
+  dispatch(genericAction(LOADING_USER, true));
+  const {
+    username, password, name, lastName, type,
+  } = user;
+  axios.post(`${SoupApiURL}/register`, {
+    username, password, name, lastName, type,
+  })
+    .then(() => dispatch(doLogIn(user, history)))
     .catch(error => dispatch(genericAction(ERROR, error.message)))
-    .finally(() => dispatch(genericAction(LOADING_USER, false)))
-}
+    .finally(() => dispatch(genericAction(LOADING_USER, false)));
+};
+
+export const doLogOut = () => (dispach) => {
+  localStorage.removeItem('soupUserToken');
+  dispach(logOut());
+};
