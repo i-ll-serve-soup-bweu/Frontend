@@ -6,6 +6,22 @@ const Input = styled.input`
   outline: none;
   padding: 0 5px;
 
+  &[type=checkbox], &[type=radio] {
+    color: red;
+    display: inline-block;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    height: 1.2em;
+    width: 1.2em;
+    border: 1px solid black;
+
+    :disabled {
+      background-color: darkgrey;
+    }
+  }
+
   ${props => props.register && css`
     height: 30px;
     width: 17em;

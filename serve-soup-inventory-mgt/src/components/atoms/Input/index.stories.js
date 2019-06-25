@@ -9,4 +9,7 @@ storiesOf('Input', module)
   .add('small', () => <Input small />)
   .add('medium', () => <Input medium />)
   .add('large', () => <Input large />)
+  .add('checkbox', () => <Input type="checkbox" />)
+  .add('radio', () => <Input type="radio" />)
+  .add('checkbox disabled', () => <Input type="radio" disabled />)
 ;
