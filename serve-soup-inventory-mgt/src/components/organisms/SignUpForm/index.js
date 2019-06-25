@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import pt from 'prop-types';
+import { history as historyPropTypes } from 'history-prop-types';
 
 import { doSignUp } from '../../../actions';
 import { StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput } from '../../atoms';
@@ -22,13 +24,15 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-const SignUpForm = (props) => {
+const SignUpForm = ({
+  doSignUp, history, loadingUser, error,
+}) => {
   const emailRef = React.createRef();
   const passRef = React.createRef();
   const nameRef = React.createRef();
   const lastNameRef = React.createRef();
 
-  const doSignUp = event => {
+  const signUp = (event) => {
     event.preventDefault();
     const user = {
       name: nameRef.current.value,
@@ -50,46 +54,49 @@ const SignUpForm = (props) => {
       <StyledRegisterCard>
         <Inner>
           <StyledHeading>Join</StyledHeading>
-          <HorizontalBar width='90%' />
+          <HorizontalBar width="90%" />
           <Form>
             <StyledInput
               register
-              placeholder='First Name'
+              placeholder="First Name"
               ref={nameRef}
             />
             <StyledInput
               register
-              placeholder='Last Name'
+              placeholder="Last Name"
               ref={lastNameRef}
             />
             <StyledInput
               register
-              placeholder='Email'
+              placeholder="Email"
               ref={emailRef}
             />
             <StyledInput
               register
-              placeholder='Confirm Email'
+              placeholder="Confirm Email"
               ref={lastNameRef}
             />
             <StyledInput
               register
-              placeholder='Password'
-              type='password'
+              placeholder="Password"
+              type="password"
               ref={passRef}
             />
             <StyledButton
               primary
-              onClick={(event) => doSignUp(event)}
+              onClick={event => signUp(event)}
             >
               Sign Up
             </StyledButton>
+            {
+              error && <p>{error}</p>
+            }
           </Form>
         </Inner>
       </StyledRegisterCard>
     </Outer>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => ({
   loadingUser: state.user.loadingUser,
