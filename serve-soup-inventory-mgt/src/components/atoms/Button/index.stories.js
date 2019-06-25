@@ -8,4 +8,5 @@ import StyledButton from './index';
 storiesOf('Button', module)
   .add('primary', () => <StyledButton primary onClick={action('clicked')}>Sign In</StyledButton>)
   .add('secondary', () => <StyledButton secondary onClick={action('clicked')}>Save</StyledButton>)
+  .add('withoutBorder', () => <StyledButton withoutBorder onClick={action('clicked')}>Sign in</StyledButton>)
 ;

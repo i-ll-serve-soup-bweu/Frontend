@@ -7,6 +7,8 @@ const StyledButton = styled.button`
   color: #6cb043;
   margin: 5px 0;
   padding: 0.25em 1em;
+  cursor: pointer;
+  outline: none;
 
   ${props => props.primary && css`
     font-size: 0.8em;
@@ -19,5 +21,15 @@ const StyledButton = styled.button`
     font-size: 0.8em;
     padding: 0.4em 3.5em;
   `}
-`
+
+  ${props => props.withoutBorder && css`
+    background: none;
+    color: black;
+    font-size: 0.6em;
+    border: none;
+    padding: 0;
+    margin: 0;
+  `}
+`;
+
 export default StyledButton;

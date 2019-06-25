@@ -6,6 +6,10 @@ const StyledDisplayText = styled.p`
   ${props => props.selected && css`
     font-weight: bold;
   `}
+
+  ${props => props.primary && css`
+    font-size: 12px;
+  `}
 `;
 
 export default StyledDisplayText;
