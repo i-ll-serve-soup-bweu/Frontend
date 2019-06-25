@@ -18,6 +18,10 @@ export function inventoryReducer(state = initialState, action) {
       return { ...state, inventory: action.payload };
     case (types.LOADING_INVENTORY):
       return { ...state, loadingInventory: action.payload };
+    case (types.ADD_INVENTORY_ITEM):
+      return { ...state, inventory: state.inventory.concat(action.payload) };
+    case (types.DELETE_INVENTORY_ITEM):
+      return { ...state, inventory: state.inventory.filter(item => item.id !== action.payload) };
     case (types.ERROR):
       return { ...state, error: action.payload };
     default:
