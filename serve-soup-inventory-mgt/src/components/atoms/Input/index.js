@@ -5,6 +5,7 @@ const StyledInput = styled.input`
   border-radius: 5px;
   outline: none;
   padding: 0 5px;
+  margin: 5px 0;
 
   &[type=checkbox], &[type=radio] {
     color: red;

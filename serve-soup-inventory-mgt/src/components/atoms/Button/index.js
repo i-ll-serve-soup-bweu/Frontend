@@ -5,12 +5,12 @@ const StyledButton = styled.button`
   border-radius: 3px;
   border: 0.5px solid #6cb043;
   color: #6cb043;
-  margin: 0 1em;
+  margin: 5px 0;
   padding: 0.25em 1em;
 
   ${props => props.primary && css`
     font-size: 0.8em;
-    padding: 0.45em 8em;
+    padding: 0.45em 7em;
   `}
 
   ${props => props.secondary && css`
