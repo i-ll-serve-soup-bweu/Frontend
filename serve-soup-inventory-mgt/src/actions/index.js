@@ -1,14 +1,19 @@
 import axios from 'axios';
+import axiosWithToken from '../axios';
 
 const SoupApiURL = 'https://be-soup.herokuapp.com';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const GET_INVENTORY = 'GET_INVENTORY';
-export const GET_KITCHEN = 'GET_KITCHEN';
 export const LOADING_USER = 'LOADING_USER';
-export const LOADING_INVENTORY = 'LOADING_INVENTORY';
+export const GET_KITCHEN = 'GET_KITCHEN';
 export const LOADING_KITCHEN = 'LOADING_KITCHEN';
+export const ADD_KITCHEN = 'ADD_KITCHEN';
+export const GET_INVENTORY = 'GET_INVENTORY';
+export const LOADING_INVENTORY = 'LOADING_INVENTORY';
+export const ADD_INVENTORY_ITEM = 'ADD_INVENTORY_ITEM';
+export const UPDATE_INVENTORY_ITEM = 'UPDATE_INVENTORY_ITEM';
+export const DELETE_INVENTORY_ITEM = 'DELETE_INVENTORY_ITEM';
 export const ERROR = 'ERROR';
 
 export const signUpOrLogIn = user => ({
@@ -66,4 +71,12 @@ export const doSignUp = (user, history) => (dispatch) => {
 export const doLogOut = () => (dispach) => {
   localStorage.removeItem('soupUserToken');
   dispach(logOut());
+};
+
+export const doGetKitchen = () => (dispatch) => {
+  dispatch(genericAction(LOADING_KITCHEN, true));
+  axiosWithToken().get(`${SoupApiURL}/kitchen`)
+    .then(response => dispatch(getKitchen(response.data)))
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => dispatch(genericAction(LOADING_KITCHEN, false)));
 };
