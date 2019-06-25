@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import ActionButton from './index';
+import StyledActionButton from './index';
 
 storiesOf('ActionButton', module)
-  .add('add', () => <ActionButton>+</ActionButton>)
-  .add('edit', () => <ActionButton />)
+  .add('add', () => <StyledActionButton>+</StyledActionButton>)
+  .add('edit', () => <StyledActionButton />)
 ;

@@ -1,29 +1,29 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import TableRow from '.';
+import StyledTableRow from '.';
 
 storiesOf('TableRow', module)
   .add('default', () => (
     <table>
       <thead>
-        <TableRow>
+        <StyledTableRow>
           <th>Heading 1</th>
           <th>Heading 2</th>
           <th>Heading 3</th>
-        </TableRow>
+        </StyledTableRow>
       </thead>
       <tbody>
-        <TableRow>
+        <StyledTableRow>
           <td>Content 1</td>
           <td>Content 2</td>
           <td>Content 3</td>
-        </TableRow>
-        <TableRow>
+        </StyledTableRow>
+        <StyledTableRow>
           <td>Content 1</td>
           <td>Content 2</td>
           <td>Content 3</td>
-        </TableRow>
+        </StyledTableRow>
       </tbody>
     </table>
   ))

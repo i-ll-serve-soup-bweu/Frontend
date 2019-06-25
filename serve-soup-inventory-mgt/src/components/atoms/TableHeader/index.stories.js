@@ -1,15 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import TableHeader from '.';
+import StyledTableHeader from '.';
 
 storiesOf('TableHeader', module)
   .add('default', () => (
     <table>
       <thead>
-        <TableHeader>Heading 1</TableHeader>
-        <TableHeader>Heading 2</TableHeader>
-        <TableHeader>Heading 3</TableHeader>
+        <StyledTableHeader>Heading 1</StyledTableHeader>
+        <StyledTableHeader>Heading 2</StyledTableHeader>
+        <StyledTableHeader>Heading 3</StyledTableHeader>
       </thead>
       <tbody>
         <tr>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Label from '.';
+import StyledLabel from '.';
 
 storiesOf('Label', module)
-  .add('default', () => <Label>Email</Label>)
+  .add('default', () => <StyledLabel>Email</StyledLabel>)
 ;

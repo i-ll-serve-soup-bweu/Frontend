@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import LogoText from './index';
+import StyledLogoText from './index';
 
 storiesOf('LogoText', module)
-  .add('LogoText', () => <LogoText>I'll Serve Soup</LogoText>)
+  .add('LogoText', () => <StyledLogoText>I'll Serve Soup</StyledLogoText>)
 ;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const DisplayText = styled.p`
+const StyledDisplayText = styled.p`
   font-size: 14px;
 
   ${props => props.selected && css`
@@ -8,4 +8,4 @@ const DisplayText = styled.p`
   `}
 `;
 
-export default DisplayText;
+export default StyledDisplayText;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ActionButton = styled.button`
+const StyledActionButton = styled.button`
   background: #7CB342;
   border-radius: 50%;
   border: none;
@@ -11,4 +11,4 @@ const ActionButton = styled.button`
   font-size: 14px;
   outline: none;
 `
-export default ActionButton;
+export default StyledActionButton;

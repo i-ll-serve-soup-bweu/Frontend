@@ -2,14 +2,14 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import Input from './index';
+import StyledInput from './index';
 
 storiesOf('Input', module)
-  .add('register', () => <Input register />)
-  .add('small', () => <Input small />)
-  .add('medium', () => <Input medium />)
-  .add('large', () => <Input large />)
-  .add('checkbox', () => <Input type="checkbox" />)
-  .add('radio', () => <Input type="radio" />)
-  .add('checkbox disabled', () => <Input type="radio" disabled />)
+  .add('register', () => <StyledInput register />)
+  .add('small', () => <StyledInput small />)
+  .add('medium', () => <StyledInput medium />)
+  .add('large', () => <StyledInput large />)
+  .add('checkbox', () => <StyledInput type="checkbox" />)
+  .add('radio', () => <StyledInput type="radio" />)
+  .add('checkbox disabled', () => <StyledInput type="radio" disabled />)
 ;

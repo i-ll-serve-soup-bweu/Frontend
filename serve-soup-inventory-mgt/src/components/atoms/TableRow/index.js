@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TableRow = styled.tr`
+const StyledTableRow = styled.tr`
   background-color: white;
   font-size: 13px;
   font-weight: 100;
@@ -11,4 +11,4 @@ const TableRow = styled.tr`
   }
 `;
 
-export default TableRow;
+export default StyledTableRow;

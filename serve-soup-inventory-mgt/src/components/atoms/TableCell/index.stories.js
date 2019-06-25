@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import TableCell from '.';
+import StyledTableCell from '.';
 
 storiesOf('TableCell', module)
   .add('default', () => (
@@ -15,9 +15,9 @@ storiesOf('TableCell', module)
       </thead>
       <tbody>
         <tr>
-          <TableCell>Cell 1</TableCell>
-          <TableCell>Cell 2</TableCell>
-          <TableCell>Cell 3</TableCell>
+          <StyledTableCell>Cell 1</StyledTableCell>
+          <StyledTableCell>Cell 2</StyledTableCell>
+          <StyledTableCell>Cell 3</StyledTableCell>
         </tr>
       </tbody>
     </table>

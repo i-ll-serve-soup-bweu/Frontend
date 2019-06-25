@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import DisplayText from '.';
+import StyledDisplayText from '.';
 
 storiesOf('Display Text', module)
-  .add('default', () => <DisplayText>Categories</DisplayText>)
-  .add('selected', () => <DisplayText selected>Categories</DisplayText>)
+  .add('default', () => <StyledDisplayText>Categories</StyledDisplayText>)
+  .add('selected', () => <StyledDisplayText selected>Categories</StyledDisplayText>)
 ;
