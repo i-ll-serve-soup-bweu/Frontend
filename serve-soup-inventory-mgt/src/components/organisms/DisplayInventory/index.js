@@ -43,24 +43,19 @@ const DisplayInventory = ({
           </TableRow>
         </thead>
         <tbody>
-          <TableRow>
-            <TableCell><StyledInput type="radio" /></TableCell>
-            <TableCell>Item 1</TableCell>
-            <TableCell>Stock Name</TableCell>
-            <TableCell>Category here</TableCell>
-            <TableCell>
-              <Link to="/inventory/1">Click</Link>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell><StyledInput type="radio" /></TableCell>
-            <TableCell>Item 1</TableCell>
-            <TableCell>Stock Name</TableCell>
-            <TableCell>Category here</TableCell>
-            <TableCell>
-              <Link to="/inventory/2">Click</Link>
-            </TableCell>
-          </TableRow>
+          {
+            inventory.map(item => (
+              <TableRow key={item.id}>
+                <TableCell><StyledInput type="radio" /></TableCell>
+                <TableCell>{item.item_name}</TableCell>
+                <TableCell>{`${item.quantity} ${item.measurement_unit}`}</TableCell>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>
+                  <Link to={`/inventory/${item.id}`}>Click</Link>
+                </TableCell>
+              </TableRow>
+            ))
+          }
         </tbody>
       </Table>
     </>
