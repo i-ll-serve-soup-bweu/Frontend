@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
 import pt from 'prop-types';
-import { history as historyPropTypes } from 'history-prop-types';
 
-import { doSignUp } from '../../../actions';
+import { doAddKitchen } from '../../../actions';
 import {
   StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput,
 } from '../../atoms';
@@ -28,23 +28,24 @@ const Form = styled.form`
 `;
 
 const CreateKitchenForm = ({
-  history, error,
+  error, doAddKitchen, history, loadingKitchen,
 }) => {
   const kitchenName = React.createRef();
   const location = React.createRef();
-  const website = React.createRef();
-  const mission = React.createRef();
+  const description = React.createRef();
 
-  // change this to add kitchen action/method
-  // const signUp = (event) => {
-  //   event.preventDefault();
-  //   const user = {
-  //     kitchenName: kitchenName.current.value,
-  //     location: location.current.value,
-  //     website: website.current.value,
-  //     mission: mission.current.value,
-  //   };
-  // };
+  const onAddKitchen = (event) => {
+    event.preventDefault();
+    const kitchen = {
+      kitchen_name: kitchenName.current.value,
+      location: location.current.value,
+      description: description.current.value,
+      km_id: localStorage.soupUserID,
+    };
+    doAddKitchen(kitchen, history);
+  };
+
+  if (loadingKitchen) { return <p>saving kitchen</p>; }
 
   return (
     <Outer>
@@ -69,17 +70,12 @@ const CreateKitchenForm = ({
             />
             <StyledInput
               register
-              placeholder="Website"
-              ref={website}
-            />
-            <StyledInput
-              register
-              placeholder="Mission"
-              ref={mission}
+              placeholder="Description"
+              ref={description}
             />
             <StyledButton
               secondary
-              onClick={null}
+              onClick={onAddKitchen}
             >
               Create Kitchen
             </StyledButton>
@@ -94,15 +90,15 @@ const CreateKitchenForm = ({
 };
 
 const mapStateToProps = state => ({
-  loadingUser: state.user.loadingUser,
+  loadingKitchen: state.user.loadingKitchen,
   error: state.user.error,
 });
 
-export default connect(mapStateToProps, { doSignUp })(CreateKitchenForm);
+export default connect(mapStateToProps, { doAddKitchen })(CreateKitchenForm);
 
 CreateKitchenForm.propTypes = {
-  // doSignUp: pt.func.isRequired,
-  // loadingUser: pt.bool.isRequired,
   error: pt.string.isRequired,
   history: pt.shape(historyPropTypes).isRequired,
+  loadingKitchen: pt.bool.isRequired,
+  doAddKitchen: pt.func.isRequired,
 };
