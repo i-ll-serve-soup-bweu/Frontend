@@ -140,3 +140,11 @@ export const doAddInventoryItem = (item, history) => (dispatch) => {
       dispatch(genericAction(LOADING_INVENTORY, false));
     });
 };
+
+export const doUpdateInventoryItem = (item, id, history) => (dispatch) => {
+  dispatch(genericAction(LOADING_INVENTORY, true));
+  axiosWithToken().put(`${SoupApiURL}/kitchen/${item.kitchen_id}/item/${id}`, item)
+    .then(() => history.push('/'))
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
+};
