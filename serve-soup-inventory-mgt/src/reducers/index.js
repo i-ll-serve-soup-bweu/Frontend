@@ -4,7 +4,7 @@ import * as types from '../actions';
 
 const initialState = {
   user: {},
-  kitchen: {},
+  kitchen: undefined,
   inventory: [],
   loadingUser: false,
   loadingInventory: false,
@@ -38,6 +38,8 @@ export function userReducer(state = initialState, action) {
     case (types.LOADING_USER):
       return { ...state, loadingUser: action.payload };
     case (types.GET_KITCHEN):
+      return { ...state, kitchen: action.payload };
+    case (types.ADD_KITCHEN):
       return { ...state, kitchen: action.payload };
     case (types.LOADING_KITCHEN):
       return { ...state, loadingKitchen: action.payload };

@@ -35,6 +35,11 @@ export const getKitchen = kitchen => ({
   payload: kitchen,
 });
 
+export const addKitchen = kitchen => ({
+  type: ADD_KITCHEN,
+  payload: kitchen,
+});
+
 export const genericAction = (type, payload) => ({
   type,
   payload,
@@ -86,10 +91,24 @@ export const doGetKitchen = () => (dispatch) => {
   axiosWithToken().get(`${SoupApiURL}/kitchen`)
     .then((response) => {
       if (response.data[0] && userID) {
-        const kitchen = response.data.filter(kitchen => Number(kitchen.id) === Number(userID))[0];
+        const kitchen = response.data.filter(kitchen => kitchen.km_id === Number(userID))[0];
         dispatch(getKitchen(kitchen));
+        // dispatch doGetInventoryItems
       }
     })
     .catch(error => dispatch(genericAction(ERROR, error.message)))
     .finally(() => dispatch(genericAction(LOADING_KITCHEN, false)));
+};
+
+export const doAddKitchen = (kitchen, history) => (dispatch) => {
+  dispatch(genericAction(LOADING_KITCHEN, true));
+  axiosWithToken().post(`${SoupApiURL}/kitchen`, kitchen)
+    .then((response) => {
+      dispatch(addKitchen(response.data));
+    })
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => {
+      history.push('/');
+      dispatch(genericAction(LOADING_KITCHEN, false));
+    });
 };
