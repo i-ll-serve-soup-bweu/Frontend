@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
+import Loader from 'react-loader-spinner';
 
 import { doGetInventory } from '../../../actions';
 import { Table } from '../../molecules';
@@ -18,7 +19,12 @@ const DisplayInventory = ({
 
   if (loadingInventory) {
     return (
-      <p>loading inventory</p>
+      <Loader
+        type="Circles"
+        color="#8CBD53"
+        height="100"
+        width="100"
+      />
     );
   }
 

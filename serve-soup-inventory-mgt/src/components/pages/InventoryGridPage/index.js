@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
+import Loader from 'react-loader-spinner';
 
 import { doGetKitchen } from '../../../actions';
 import { DisplayInventory, AppNav } from '../../organisms';
@@ -15,7 +16,12 @@ function InventoryGrid({
 
   if (loadingKitchen) {
     return (
-      <p>loading kitchen</p>
+      <Loader
+        type="Circles"
+        color="#8CBD53"
+        height="100"
+        width="100"
+      />
     );
   }
 
