@@ -45,12 +45,6 @@ function App() {
 
         <PrivateRoute
           exact
-          path="/inventory/:id/edit-item"
-          component={InventoryItemDetailForm}
-        />
-
-        <PrivateRoute
-          exact
           path="/kitchen/create"
           component={CreateKitchenPage}
         />
