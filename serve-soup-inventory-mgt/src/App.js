@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import PrivateRoute from './components/PrivateRoute';
 import { LoginPage, SignUpPage } from './components/pages';
-import SignUpForm from './components/organisms/SignUpForm';
-import Header from './components/templates/Header';
 import InventoryGrid from './components/pages/InventoryGridPage';
 import InventoryItemDetails from './components/pages/InventoryDetailPage';
 import InventoryItemForm from './components/pages/InventoryItemPage';
