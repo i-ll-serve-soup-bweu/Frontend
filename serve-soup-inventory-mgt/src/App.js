@@ -2,27 +2,26 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import PrivateRoute from './components/PrivateRoute';
-import LoginForm from './components/organisms/LoginForm';
+import { LoginPage, SignUpPage } from './components/pages';
 import SignUpForm from './components/organisms/SignUpForm';
 import Header from './components/templates/Header';
-import InventoryGrid from './components/pages/InventoryGrid';
-import InventoryItemDetails from './components/pages/InventoryItemDetails';
-import InventoryItemForm from './components/pages/InventoryItemForm';
+import InventoryGrid from './components/pages/InventoryGridPage';
+import InventoryItemDetails from './components/pages/InventoryDetailPage';
+import InventoryItemForm from './components/pages/InventoryItemPage';
 import CreateKitchenPage from './components/pages/CreateKitchenPage';
 
 function App() {
   return (
     <Router>
-      <Header />
       <Route
         exact
         path="/login"
-        component={LoginForm}
+        component={LoginPage}
       />
       <Route
         exact
         path="/signup"
-        component={SignUpForm}
+        component={SignUpPage}
       />
 
       <PrivateRoute
