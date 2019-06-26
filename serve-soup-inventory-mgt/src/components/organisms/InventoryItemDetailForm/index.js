@@ -3,14 +3,23 @@ import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import Loader from 'react-loader-spinner';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { doGetKitchen, doAddInventoryItem } from '../../../actions';
+import { doGetKitchen, doAddInventoryItem, doUpdateInventoryItem } from '../../../actions';
 import {
   StyledInput, DisplayText, StyledButton,
 } from '../../atoms';
 
 const InventoryItemDetailForm = ({
-  doGetKitchen, doAddInventoryItem, kitchen, loadingKitchen, history,
+  doGetKitchen,
+  doAddInventoryItem,
+  doUpdateInventoryItem,
+  kitchen,
+  inventory,
+  loadingKitchen,
+  loadingInventory,
+  history,
+  match,
 }) => {
   const stockRef = React.createRef();
   const nameRef = React.createRef();
@@ -18,7 +27,7 @@ const InventoryItemDetailForm = ({
   const categoryRef = React.createRef();
   // const alertRef = React.createRef();
 
-  const onAddInventoryItem = () => {
+  const onAddUpdateInventoryItem = (action, id) => {
     const newItem = {
       item_name: nameRef.current.value,
       quantity: stockRef.current.value,
@@ -26,14 +35,30 @@ const InventoryItemDetailForm = ({
       category: categoryRef.current.value,
       kitchen_id: kitchen.id,
     };
-    doAddInventoryItem(newItem, history);
+    if (action === 'add') doAddInventoryItem(newItem, history);
+    else doUpdateInventoryItem(newItem, id, history);
   };
 
   useEffect(() => {
     doGetKitchen();
   }, [doGetKitchen]);
 
-  if (loadingKitchen) {
+  useEffect(() => {
+    const { id } = match.params;
+    let oneItem;
+    if (id && inventory[0] && !Number.isNaN(Number(id))) {
+      [oneItem] = inventory.filter(item => item.id === Number(id));
+    }
+
+    if (oneItem && nameRef.current) {
+      nameRef.current.value = oneItem.item_name;
+      stockRef.current.value = oneItem.quantity;
+      measurementRef.current.value = oneItem.measurement_unit;
+      categoryRef.current.value = oneItem.category;
+    }
+  }, [inventory, nameRef, stockRef, measurementRef, categoryRef, match]);
+
+  if (loadingKitchen || loadingInventory) {
     return (
       <Loader
         type="Circles"
@@ -44,6 +69,8 @@ const InventoryItemDetailForm = ({
     );
   }
 
+  const { id } = match.params;
+  const isUpdate = !Number.isNaN(Number(id));
   return (
     <div>
       <div>
@@ -105,7 +132,12 @@ const InventoryItemDetailForm = ({
         </select>
       </div> */}
       <div>
-        <StyledButton secondary onClick={onAddInventoryItem}>Save</StyledButton>
+        <StyledButton
+          secondary
+          onClick={isUpdate ? () => onAddUpdateInventoryItem('update', id) : () => onAddUpdateInventoryItem('add')}
+        >
+          Save
+        </StyledButton>
         <StyledButton primary>Discard Item</StyledButton>
       </div>
     </div>
@@ -120,15 +152,21 @@ const mapStateToProps = state => ({
 });
 
 export default
-connect(mapStateToProps, { doGetKitchen, doAddInventoryItem })(InventoryItemDetailForm);
+connect(mapStateToProps,
+  {
+    doGetKitchen, doAddInventoryItem, doUpdateInventoryItem,
+  })(InventoryItemDetailForm);
 
 InventoryItemDetailForm.defaultProps = {
   kitchen: undefined,
+  inventory: undefined,
 };
 
 InventoryItemDetailForm.propTypes = {
   doGetKitchen: pt.func.isRequired,
   doAddInventoryItem: pt.func.isRequired,
+  doUpdateInventoryItem: pt.func.isRequired,
+  inventory: pt.arrayOf(pt.object),
   kitchen: pt.shape({
     id: pt.number,
     kitchen_name: pt.string,
@@ -137,5 +175,7 @@ InventoryItemDetailForm.propTypes = {
     km_id: pt.number,
   }),
   loadingKitchen: pt.bool.isRequired,
+  loadingInventory: pt.bool.isRequired,
   history: pt.shape(historyPropTypes).isRequired,
+  match: ReactRouterPropTypes.match.isRequired,
 };
