@@ -11,7 +11,6 @@ const StyledNavContainer = styled.div`
   background-color: white;
   box-shadow: 0 8px 6px -10px black;
   line-height: 2;
-  margin: 0 auto 5px auto;
   padding: 0 10px;
 `;
 
@@ -21,6 +20,7 @@ const StyledLink = styled(Link)`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
+  color: inherit;
   .active {
     color: #79AC48;
   }
@@ -51,13 +51,19 @@ const AppNav = ({ loggedIn }) => (
       loggedIn
         ? (
           <StyledRightNav>
-            <StyledNavLink>
+            <StyledNavLink
+              to="/"
+            >
               Inventory
             </StyledNavLink>
-            <StyledNavLink>
+            <StyledNavLink
+              to="/orders"
+            >
               Orders
             </StyledNavLink>
-            <StyledNavLink>
+            <StyledNavLink
+              to="/donations"
+            >
               Donations
             </StyledNavLink>
             <span>|</span>
