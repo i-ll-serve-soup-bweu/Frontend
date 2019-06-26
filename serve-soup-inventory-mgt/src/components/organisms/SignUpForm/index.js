@@ -5,7 +5,9 @@ import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 
 import { doSignUp } from '../../../actions';
-import { StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput } from '../../atoms';
+import {
+  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput,
+} from '../../atoms';
 
 const Outer = styled.div`
   margin: 0 auto;
