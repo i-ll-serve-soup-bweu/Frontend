@@ -1,14 +1,14 @@
 import React from 'react';
-import AppNav from '../../organisms';
 
 import LoginForm from '../../organisms/LoginForm';
+import { ExternalTemplate } from '../../templates';
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <div>
-      <AppNav>
+      <ExternalTemplate>
         <LoginForm />
-      </AppNav>
+      </ExternalTemplate>
     </div>
   );
 }
