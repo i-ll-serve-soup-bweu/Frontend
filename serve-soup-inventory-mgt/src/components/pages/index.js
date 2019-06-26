@@ -1,3 +1,5 @@
-export { default as InventoryItemDetails } from './InventoryItemDetails';
-export { default as InventoryGrid } from './InventoryGrid';
-export { default as InventoryItemForm } from './InventoryItemForm';
+export { default as InventoryDetailPage } from './InventoryDetailPage';
+export { default as InventoryPage } from './InventoryGridPage';
+export { default as InventoryItemPage } from './InventoryItemPage';
+export { default as LoginPage } from './LoginPage';
+export { default as SignUpPage } from './SignUpPage';

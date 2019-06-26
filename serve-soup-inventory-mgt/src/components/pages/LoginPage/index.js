@@ -2,14 +2,14 @@ import React from 'react';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 
-import { CreateKitchenForm } from '../../organisms';
+import LoginForm from '../../organisms/LoginForm';
 import { ExternalTemplate } from '../../templates';
 
-export default function CreateKitchenPage({ history, location, match }) {
+export default function LoginPage({ history, location, match }) {
   return (
     <div>
       <ExternalTemplate>
-        <CreateKitchenForm
+        <LoginForm
           history={history}
           location={location}
           match={match}
@@ -19,6 +19,6 @@ export default function CreateKitchenPage({ history, location, match }) {
   );
 }
 
-CreateKitchenPage.propTypes = {
+LoginPage.propTypes = {
   history: pt.shape(historyPropTypes).isRequired,
 };

@@ -10,7 +10,6 @@ import {
 } from '../../atoms';
 
 const Outer = styled.div`
-  width: 55%;
   margin: 0 auto;
 `;
 
@@ -19,6 +18,8 @@ const Inner = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 40px 40px;
+  margin: 30px 20px;
 `;
 
 const Form = styled.form`
@@ -50,8 +51,8 @@ const LoginForm = ({
     <Outer>
       <StyledRegisterCard>
         <Inner>
-          <StyledHeading>Join</StyledHeading>
-          <HorizontalBar width="90%" />
+          <StyledHeading>Sign in</StyledHeading>
+          <HorizontalBar width="100%" />
           <Form>
             <StyledInput
               register
@@ -93,58 +94,3 @@ LoginForm.propTypes = {
   error: pt.string.isRequired,
   history: pt.shape(historyPropTypes).isRequired,
 };
-
-// function LoginForm({
-//   doLogIn,
-//   loadingUser,
-//   history,
-//   error,
-// }) {
-//   const emailRef = React.createRef();
-//   const passRef = React.createRef();
-
-//   const LogIn = () => {
-//     const user = {
-//       username: emailRef.current.value,
-//       password: passRef.current.value,
-//     };
-//     doLogIn(user, history);
-//   };
-//   if (loadingUser) {
-//     return (
-//       <p>Logging In</p>
-//     );
-//   }
-
-//   if (error) {
-//     return (
-//       <>
-//         <p>{error}</p>
-//         <Button onClick={() => window.location.reload()}>Try Again</Button>
-//       </>
-//     );
-//   }
-
-//   return (
-//     <div>
-//       <GenericHeader fontSize={80} color="black">Sign In</GenericHeader>
-//       <Input type="email" placeholder="Email Address" ref={emailRef} />
-//       <Input type="password" placeholder="Password" ref={passRef} />
-//       <Button onClick={LogIn}>Sign In</Button>
-//     </div>
-//   );
-// }
-
-// const mapStateToProps = state => ({
-//   loadingUser: state.user.loadingUser,
-//   error: state.user.error,
-// });
-
-// export default connect(mapStateToProps, { doLogIn })(LoginForm);
-
-// LoginForm.propTypes = {
-//   doLogIn: pt.func.isRequired,
-//   loadingUser: pt.bool.isRequired,
-//   error: pt.string.isRequired,
-//   history: pt.shape(historyPropTypes).isRequired,
-// };
