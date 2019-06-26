@@ -30,6 +30,11 @@ export const getInventory = inventory => ({
   payload: inventory,
 });
 
+export const addInventoryItem = item => ({
+  type: ADD_INVENTORY_ITEM,
+  payload: item,
+});
+
 export const getKitchen = kitchen => ({
   type: GET_KITCHEN,
   payload: kitchen,
@@ -120,5 +125,18 @@ export const doAddKitchen = (kitchen, history) => (dispatch) => {
     .finally(() => {
       history.push('/');
       dispatch(genericAction(LOADING_KITCHEN, false));
+    });
+};
+
+export const doAddInventoryItem = (item, history) => (dispatch) => {
+  dispatch(genericAction(LOADING_INVENTORY, true));
+  axiosWithToken().post(`${SoupApiURL}/kitchen/${item.kitchen_id}/item`, item)
+    .then((response) => {
+      dispatch(addInventoryItem(response.data));
+    })
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => {
+      history.push('/');
+      dispatch(genericAction(LOADING_INVENTORY, false));
     });
 };
