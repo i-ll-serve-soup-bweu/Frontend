@@ -85,6 +85,16 @@ export const doLogOut = () => (dispach) => {
   dispach(logOut());
 };
 
+export const doGetInventory = kitchenId => (dispatch) => {
+  dispatch(genericAction(LOADING_INVENTORY, true));
+  axiosWithToken().get(`${SoupApiURL}/kitchen/${kitchenId}/item`)
+    .then((response) => {
+      dispatch(getInventory(response.data));
+    })
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
+};
+
 export const doGetKitchen = () => (dispatch) => {
   dispatch(genericAction(LOADING_KITCHEN, true));
   const userID = localStorage.getItem('soupUserID');
@@ -93,7 +103,7 @@ export const doGetKitchen = () => (dispatch) => {
       if (response.data[0] && userID) {
         const kitchen = response.data.filter(kitchen => kitchen.km_id === Number(userID))[0];
         dispatch(getKitchen(kitchen));
-        // dispatch doGetInventoryItems
+        if (kitchen) dispatch(doGetInventory(kitchen.id));
       }
     })
     .catch(error => dispatch(genericAction(ERROR, error.message)))
