@@ -1,11 +1,23 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 
 import { doGetKitchen } from '../../../actions';
 import { DisplayInventory, AppNav } from '../../organisms';
+import { StyledHeading, StyledActionButton } from '../../atoms';
+
+const StyledInventoryGrid = styled.div`
+  margin: 0 5rem;
+`;
+
+const StyledHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 function InventoryGrid({
   doGetKitchen, kitchen, loadingKitchen, error,
@@ -36,10 +48,16 @@ function InventoryGrid({
   return (
     <div>
       <AppNav loggedIn />
-      {
-        error && <p>{error}</p>
-      }
-      <DisplayInventory />
+      <StyledInventoryGrid>
+        {
+          error && <p>{error}</p>
+        }
+        <StyledHeaderContainer>
+          <StyledHeading>Inventory</StyledHeading>
+          <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+        </StyledHeaderContainer>
+        <DisplayInventory />
+      </StyledInventoryGrid>
     </div>
   );
 }

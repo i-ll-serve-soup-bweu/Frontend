@@ -10,5 +10,7 @@ const StyledActionButton = styled.button`
   text-decoration: none;
   font-size: 14px;
   outline: none;
-`
+  cursor: pointer;
+`;
+
 export default StyledActionButton;
