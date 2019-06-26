@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { CreateKitchenForm } from '../../organisms';
+import { ExternalTemplate } from '../../templates';
 
 export default function CreateKitchenPage() {
   return (
     <div>
-      <CreateKitchenForm />
+      <ExternalTemplate>
+        <CreateKitchenForm />
+      </ExternalTemplate>
     </div>
   );
 }
