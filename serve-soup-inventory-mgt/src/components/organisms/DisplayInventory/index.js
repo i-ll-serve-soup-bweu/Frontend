@@ -11,6 +11,7 @@ import {
   TableCell, TableHead, TableRow, StyledInput, StyledHeading, StyledActionButton,
 } from '../../atoms';
 
+
 const StyledInventoryContainer = styled.div`
   margin-top: 20px;
   padding-left: 10px;
@@ -20,6 +21,16 @@ const StyledHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const StyledBadge = styled.span`
+  display: inline-block;
+  background: grey;
+  color: white;
+  padding: .2rem .5rem;
+  margin-left: 1rem;
+  border-radius: .5rem;
+  font-size: 70%;
 `;
 
 const DisplayInventory = ({
@@ -69,7 +80,10 @@ const DisplayInventory = ({
             inventory.map(item => (
               <TableRow key={item.id}>
                 <TableCell><StyledInput type="radio" /></TableCell>
-                <TableCell>{item.item_name}</TableCell>
+                <TableCell>
+                  {`${item.item_name}`}
+                  {!item.quantity ? (<StyledBadge>Out of Stock</StyledBadge>) : ''}
+                </TableCell>
                 <TableCell>{`${item.quantity} ${item.measurement_unit}`}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>
