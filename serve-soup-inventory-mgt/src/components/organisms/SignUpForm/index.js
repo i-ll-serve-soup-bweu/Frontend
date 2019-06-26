@@ -8,7 +8,6 @@ import { doSignUp } from '../../../actions';
 import { StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput } from '../../atoms';
 
 const Outer = styled.div`
-  width: 55%;
   margin: 0 auto;
 `;
 
@@ -17,6 +16,8 @@ const Inner = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 40px 40px;
+  margin: 30px 20px;
 `;
 
 const Form = styled.form`
@@ -54,7 +55,7 @@ const SignUpForm = ({
       <StyledRegisterCard>
         <Inner>
           <StyledHeading>Join</StyledHeading>
-          <HorizontalBar width="90%" />
+          <HorizontalBar width="100%" />
           <Form>
             <StyledInput
               register
