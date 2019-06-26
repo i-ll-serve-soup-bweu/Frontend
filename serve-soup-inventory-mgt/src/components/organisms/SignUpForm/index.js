@@ -1,24 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 
 import { doSignUp } from '../../../actions';
-import GenericHeader from '../../atoms/Heading';
-import Input from '../../atoms/Input';
-import Button from '../../atoms/Button';
+import { StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput } from '../../atoms';
 
-function SignUpForm({
-  doSignUp,
-  history,
-  loadingUser,
-  error,
-}) {
+const Outer = styled.div`
+  width: 55%;
+  margin: 0 auto;
+`;
+
+const Inner = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SignUpForm = ({
+  doSignUp, history, loadingUser, error,
+}) => {
   const emailRef = React.createRef();
   const passRef = React.createRef();
   const nameRef = React.createRef();
   const lastNameRef = React.createRef();
-  const signUp = () => {
+
+  const signUp = (event) => {
+    event.preventDefault();
     const user = {
       name: nameRef.current.value,
       lastName: lastNameRef.current.value,
@@ -34,26 +49,54 @@ function SignUpForm({
     );
   }
 
-  if (error) {
-    return (
-      <>
-        <p>{error}</p>
-        <Button onClick={() => window.location.reload()}>Try Again</Button>
-      </>
-    );
-  }
-
   return (
-    <div>
-      <GenericHeader fontSize={80} color="black">Sign Up</GenericHeader>
-      <Input placeholder="First Name" ref={nameRef} />
-      <Input placeholder="Last Name" ref={lastNameRef} />
-      <Input type="email" placeholder="Email Address" ref={emailRef} />
-      <Input type="password" placeholder="Password" ref={passRef} />
-      <Button onClick={signUp}>Sign Up</Button>
-    </div>
+    <Outer>
+      <StyledRegisterCard>
+        <Inner>
+          <StyledHeading>Join</StyledHeading>
+          <HorizontalBar width="90%" />
+          <Form>
+            <StyledInput
+              register
+              placeholder="First Name"
+              ref={nameRef}
+            />
+            <StyledInput
+              register
+              placeholder="Last Name"
+              ref={lastNameRef}
+            />
+            <StyledInput
+              register
+              placeholder="Email"
+              ref={emailRef}
+            />
+            <StyledInput
+              register
+              placeholder="Confirm Email"
+              ref={lastNameRef}
+            />
+            <StyledInput
+              register
+              placeholder="Password"
+              type="password"
+              ref={passRef}
+            />
+            <StyledButton
+              primary
+              onClick={event => signUp(event)}
+            >
+              Sign Up
+            </StyledButton>
+            {
+              error && <p>{error}</p>
+            }
+          </Form>
+        </Inner>
+      </StyledRegisterCard>
+    </Outer>
   );
-}
+};
 
 const mapStateToProps = state => ({
   loadingUser: state.user.loadingUser,

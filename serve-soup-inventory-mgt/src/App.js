@@ -8,6 +8,7 @@ import Header from './components/templates/Header';
 import InventoryGrid from './components/pages/InventoryGrid';
 import InventoryItemDetails from './components/pages/InventoryItemDetails';
 import InventoryItemForm from './components/pages/InventoryItemForm';
+import CreateKitchenPage from './components/pages/CreateKitchenPage';
 
 function App() {
   return (
@@ -46,6 +47,12 @@ function App() {
         exact
         path="/inventory/:id/edit-item"
         component={InventoryItemForm}
+      />
+
+      <PrivateRoute
+        exact
+        path="/kitchen/create"
+        component={CreateKitchenPage}
       />
 
     </Router>
