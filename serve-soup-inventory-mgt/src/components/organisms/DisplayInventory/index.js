@@ -3,12 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 
 import { doGetInventory } from '../../../actions';
 import { Table } from '../../molecules';
 import {
   TableCell, TableHead, TableRow, StyledInput,
 } from '../../atoms';
+
+const StyledBadge = styled.span`
+  display: inline-block;
+  background: grey;
+  color: white;
+  padding: .2rem .5rem;
+  margin-left: 1rem;
+  border-radius: .5rem;
+  font-size: 70%;
+`;
 
 const DisplayInventory = ({
   inventory, kitchen, loadingInventory, doGetInventory, error,
@@ -53,7 +64,10 @@ const DisplayInventory = ({
             inventory.map(item => (
               <TableRow key={item.id}>
                 <TableCell><StyledInput type="radio" /></TableCell>
-                <TableCell>{item.item_name}</TableCell>
+                <TableCell>
+                  {`${item.item_name}`}
+                  {!item.quantity ? (<StyledBadge>Out of Stock</StyledBadge>) : ''}
+                </TableCell>
                 <TableCell>{`${item.quantity} ${item.measurement_unit}`}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>
