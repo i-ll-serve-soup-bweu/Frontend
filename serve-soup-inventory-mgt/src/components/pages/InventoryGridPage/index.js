@@ -53,10 +53,11 @@ InventoryGrid.defaultProps = {
 InventoryGrid.propTypes = {
   doGetKitchen: pt.func.isRequired,
   kitchen: pt.shape({
-    kitchen_name: pt.string.isRequired,
-    location: pt.string.isRequired,
-    description: pt.string.isRequired,
-    km_id: pt.number.isRequired,
+    id: pt.number,
+    kitchen_name: pt.string,
+    location: pt.string,
+    description: pt.string,
+    km_id: pt.number,
   }),
   loadingKitchen: pt.bool.isRequired,
   error: pt.string.isRequired,
