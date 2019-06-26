@@ -4,7 +4,7 @@ import * as types from '../actions';
 
 const initialState = {
   user: {},
-  kitchen: {},
+  kitchen: undefined,
   inventory: [],
   loadingUser: false,
   loadingInventory: false,
@@ -15,9 +15,13 @@ const initialState = {
 export function inventoryReducer(state = initialState, action) {
   switch (action.type) {
     case (types.GET_INVENTORY):
-      return { ...state, inventory: action.payload };
+      return { ...state, inventory: action.payload, error: '' };
     case (types.LOADING_INVENTORY):
-      return { ...state, loadingInventory: action.payload };
+      return { ...state, loadingInventory: action.payload, error: '' };
+    case (types.ADD_INVENTORY_ITEM):
+      return { ...state, inventory: state.inventory.concat(action.payload), error: '' };
+    case (types.DELETE_INVENTORY_ITEM):
+      return { ...state, inventory: state.inventory.filter(item => item.id !== action.payload), error: '' };
     case (types.ERROR):
       return { ...state, error: action.payload };
     default:
@@ -28,13 +32,15 @@ export function inventoryReducer(state = initialState, action) {
 export function userReducer(state = initialState, action) {
   switch (action.type) {
     case (types.LOGIN):
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, error: '' };
     case (types.LOGOUT):
       return {};
     case (types.LOADING_USER):
       return { ...state, loadingUser: action.payload };
     case (types.GET_KITCHEN):
-      return { ...state, kitchen: action.payload };
+      return { ...state, kitchen: action.payload, error: '' };
+    case (types.ADD_KITCHEN):
+      return { ...state, kitchen: action.payload, error: '' };
     case (types.LOADING_KITCHEN):
       return { ...state, loadingKitchen: action.payload };
     case (types.ERROR):

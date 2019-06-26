@@ -7,6 +7,18 @@ const StyledInput = styled.input`
   padding: 0 5px;
   margin: 5px 0;
 
+  ${props => props.heading && css`
+    border: none;
+    display: inline-block;
+    border-bottom: 0.5px solid black;
+    font-size: 3rem;
+    font-weight: bold;
+
+    :hover {
+      border: 0.5px solid grey;
+    }
+  `}
+
   &[type=checkbox], &[type=radio] {
     color: red;
     display: inline-block;

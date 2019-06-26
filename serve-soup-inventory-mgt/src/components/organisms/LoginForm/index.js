@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 import { doLogIn } from '../../../actions';
 import {
@@ -43,7 +44,12 @@ const LoginForm = ({
   };
   if (loadingUser) {
     return (
-      <p>Signing In</p>
+      <Loader
+        type="Circles"
+        color="#8CBD53"
+        height="100"
+        width="100"
+      />
     );
   }
 
