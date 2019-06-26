@@ -22,6 +22,11 @@ const StyledButton = styled.button`
     padding: 0.4em 3.5em;
   `}
 
+  ${props => props.tertiary && css`
+    font-size: 0.8em;
+    padding: 0.45em 1em;
+  `}
+
   ${props => props.withoutBorder && css`
     background: none;
     color: black;
