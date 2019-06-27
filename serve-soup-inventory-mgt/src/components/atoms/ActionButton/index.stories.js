@@ -5,5 +5,4 @@ import StyledActionButton from './index';
 
 storiesOf('ActionButton', module)
   .add('add', () => <StyledActionButton>+</StyledActionButton>)
-  .add('edit', () => <StyledActionButton />)
 ;
