@@ -40,6 +40,11 @@ export const getKitchen = kitchen => ({
   payload: kitchen,
 });
 
+export const deleteItem = id => ({
+  type: DELETE_INVENTORY_ITEM,
+  payload: id,
+});
+
 export const addKitchen = kitchen => ({
   type: ADD_KITCHEN,
   payload: kitchen,
@@ -145,6 +150,17 @@ export const doUpdateInventoryItem = (item, id, history) => (dispatch) => {
   dispatch(genericAction(LOADING_INVENTORY, true));
   axiosWithToken().put(`${SoupApiURL}/kitchen/${item.kitchen_id}/item/${id}`, item)
     .then(() => history.push('/'))
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
+};
+
+export const doDeleteItem = (id, kitchenId, history) => (dispatch) => {
+  dispatch(genericAction(LOADING_INVENTORY, true));
+  axiosWithToken().delete(`${SoupApiURL}/kitchen/${kitchenId}/item/${id}`)
+    .then(() => {
+      dispatch(deleteItem(id));
+      history.push('/');
+    })
     .catch(error => dispatch(genericAction(ERROR, error.message)))
     .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
 };
