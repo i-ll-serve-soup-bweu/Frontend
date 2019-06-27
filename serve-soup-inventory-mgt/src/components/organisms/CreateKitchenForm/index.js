@@ -56,9 +56,7 @@ const CreateKitchenForm = ({
     <Outer>
       <StyledRegisterCard>
         <Inner>
-          <StyledHeading
-            tertiary
-          >
+          <StyledHeading>
             Tell us a little about your kitchen
           </StyledHeading>
           <HorizontalBar width="100%" />
