@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Redirect, Link,
-} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import styled from 'styled-components';
@@ -10,13 +8,7 @@ import { doGetKitchen } from '../../../actions';
 import {
   DisplayInventory,
 } from '../../organisms';
-import { StyledHeading, StyledActionButton, LoaderContainer } from '../../atoms';
-
-const StyledHeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+import { LoaderContainer } from '../../atoms';
 
 const StyledInventoryContainer = styled.div`
   margin-top: 20px;
@@ -50,11 +42,6 @@ function InventoryGrid({
         {
         error && <p>{error}</p>
        }
-
-        <StyledHeaderContainer>
-          <StyledHeading Primary>Inventory</StyledHeading>
-          <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
-        </StyledHeaderContainer>
         <DisplayInventory history={history} />
       </StyledInventoryContainer>
     </div>

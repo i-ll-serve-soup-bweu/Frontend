@@ -4,18 +4,23 @@ import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
+import Tooltip from 'react-simple-tooltip';
 
 import {
   doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
 } from '../../../actions';
 import {
-  StyledInput, DisplayText, StyledButton, LoaderContainer, SelectInput, StyledHeading,
+  StyledInput, DisplayText, StyledButton, LoaderContainer, SelectInput, StyledHeading, Arrow,
 } from '../../atoms';
 
 const StyledItemFormContainer = styled.div`
   margin-top: 16px;
   padding-left: 10px;
   width: 100%;
+
+  @media (max-width: 760px) {
+    padding-left: 0;
+  }
 `;
 
 const StyledRow = styled.div`
@@ -27,20 +32,33 @@ const StyledDisplayText = styled.div`
   width: 150px;
   text-align: right;
   padding-right: 8px;
+  
+  @media (max-width: 760px) {
+    font-size: .8em;
+    width: 100px;
+  }
 `;
 
 const StyledItemName = styled.div`
   margin-left: 40px;
+
+  @media (max-width: 760px) {
+    margin-left: 10px;
+  }
 `;
 
 const StyledButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 40px;
+
+  @media (max-width: 760px) {
+    align-items: center;
+  }
 `;
 
 const StyledBackText = styled.p`
-  margin-left: 40px;
+  margin-left: 10px;
   color: grey;
   cursor: pointer;
 `;
@@ -62,7 +80,6 @@ const InventoryItemForm = ({
   const measurementRef = React.createRef();
   const categoryRef = React.createRef();
   const alertRef = React.createRef();
-  const priceRef = React.createRef();
 
   const onAddUpdateInventoryItem = (action, id) => {
     const newItem = {
@@ -113,6 +130,8 @@ const InventoryItemForm = ({
       <StyledBackText
         onClick={history.goBack}
       >
+        <Arrow left />
+        {' '}
         Back to Inventory
       </StyledBackText>
       <StyledItemName>
@@ -167,11 +186,12 @@ const InventoryItemForm = ({
         <StyledDisplayText>
           <DisplayText primary>Price per unit:</DisplayText>
         </StyledDisplayText>
-        <StyledInput
-          medium
-          ref={priceRef}
-          defaultValue={'' || ''}
-        />
+        <Tooltip content="Available in Pro Version">
+          <StyledInput
+            disabled
+            medium
+          />
+        </Tooltip>
       </StyledRow>
       <StyledHeading
         secondary

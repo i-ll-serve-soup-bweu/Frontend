@@ -6,6 +6,10 @@ const StyledTableHeader = styled.th`
   font-weight: 100;
   font-size: 0.9rem;
   color: #909090;
+
+  @media (max-width: 760px) {
+    width: 20px;
+  }
 `;
 
 export default StyledTableHeader;

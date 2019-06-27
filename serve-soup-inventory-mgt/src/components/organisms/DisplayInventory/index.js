@@ -15,6 +15,10 @@ const StyledDisplayInventoryContainer = styled.div`
   margin-top: 16px;
   padding-left: 10px;
   width: 100%;
+
+  @media (max-width: 760px) {
+    padding-left: 0;
+  }
 `;
 
 const StyledHeaderContainer = styled.div`

@@ -70,5 +70,10 @@ const StyledInput = styled.input`
       border: 0.5px solid grey;
     }
   `}
+
+  ${props => props.disabled && css`
+    background: #e9e9e9;
+    cursor: not-allowed;
+  `}
 `
 export default StyledInput;

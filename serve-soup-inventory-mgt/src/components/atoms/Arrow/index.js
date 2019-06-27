@@ -11,6 +11,11 @@ const Arrow = styled.i`
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   `}
+  ${props => props.left && css`
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    padding: 4px;
+  `}
 `;
 
 export default Arrow;

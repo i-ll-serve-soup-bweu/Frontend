@@ -86,7 +86,9 @@ const MobileSubNav = styled.div`
       border-left: 1px solid;
     }
   }
-  
+  @media (min-width: 760px) {
+    display: none;
+  }
 `;
 
 const StyledSpin = styled(Spin)`

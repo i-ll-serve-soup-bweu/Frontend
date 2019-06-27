@@ -19,6 +19,10 @@ const StyledSidebar = styled.div`
 
 const StyledDashboardContent = styled.div`
   width: 75%;
+
+  @media (max-width: 760px) {
+    width: 100%;
+  }
 `;
 
 function App() {
