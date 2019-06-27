@@ -7,11 +7,11 @@ import { StyledLogoText, StyledButton } from '../../atoms';
 const StyledNavContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   background-color: white;
   box-shadow: 0 8px 6px -10px black;
-  line-height: 2;
-  padding: 0 10px;
+  line-height: 3;
+  padding: 0 60px;
 `;
 
 const StyledLink = styled(Link)`
@@ -20,9 +20,14 @@ const StyledLink = styled(Link)`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  color: inherit;
-  .active {
+  color: #B0B0B0;
+  text-align: center;
+  font-size: 12px;
+  width: 100px;
+  font-weight: bold;
+  &.active {
     color: #79AC48;
+    border-bottom: 3px solid;
   }
 `;
 
@@ -32,10 +37,16 @@ const StyledAuthNav = styled.div`
   width: 150px;
 `;
 
+const StyledMiddleNav = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+`;
+
 const StyledRightNav = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 10%;
 `;
 
 const AppNav = ({ loggedIn }) => (
@@ -50,25 +61,29 @@ const AppNav = ({ loggedIn }) => (
     {
       loggedIn
         ? (
-          <StyledRightNav>
-            <StyledNavLink
-              to="/"
-            >
-              Inventory
-            </StyledNavLink>
-            <StyledNavLink
-              to="/orders"
-            >
-              Orders
-            </StyledNavLink>
-            <StyledNavLink
-              to="/donations"
-            >
-              Donations
-            </StyledNavLink>
-            <span>|</span>
-            <div>profile</div>
-          </StyledRightNav>
+          <>
+            <StyledMiddleNav>
+              <StyledNavLink
+                to="/"
+              >
+                INVENTORY
+              </StyledNavLink>
+              <StyledNavLink
+                to="/orders"
+              >
+                ORDERS
+              </StyledNavLink>
+              <StyledNavLink
+                to="/donations"
+              >
+                DONATIONS
+              </StyledNavLink>
+            </StyledMiddleNav>
+            <StyledRightNav>
+              <span>|</span>
+              <div>profile</div>
+            </StyledRightNav>
+          </>
         )
         : (
           <StyledAuthNav>
