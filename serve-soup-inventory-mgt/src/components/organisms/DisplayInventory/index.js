@@ -3,12 +3,24 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 
 import { doGetInventory } from '../../../actions';
 import { Table } from '../../molecules';
 import {
-  TableCell, TableHead, TableRow, StyledInput,
+  TableCell, TableHead, TableRow, StyledInput, StyledHeading, StyledActionButton,
 } from '../../atoms';
+
+const StyledInventoryContainer = styled.div`
+  margin-top: 20px;
+  padding-left: 10px;
+`;
+
+const StyledHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const DisplayInventory = ({
   inventory, kitchen, loadingInventory, doGetInventory, error,
@@ -34,10 +46,14 @@ const DisplayInventory = ({
     );
   }
   return (
-    <>
+    <StyledInventoryContainer>
       {
-      error && <p>{error}</p>
-    }
+        error && <p>{error}</p>
+      }
+      <StyledHeaderContainer>
+        <StyledHeading secondary>Inventory</StyledHeading>
+        <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+      </StyledHeaderContainer>
       <Table>
         <thead>
           <TableRow>
@@ -64,7 +80,7 @@ const DisplayInventory = ({
           }
         </tbody>
       </Table>
-    </>
+    </StyledInventoryContainer>
   );
 };
 
