@@ -8,15 +8,15 @@ const StyledInput = styled.input`
   margin: 5px 0;
 
   ${props => props.heading && css`
-    border: none;
+    border: 0;
     display: inline-block;
-    border-bottom: 0.5px solid black;
-    font-size: 3rem;
+    border-bottom: 0.2px solid grey;
+    font-size: 1.7rem;
     font-weight: bold;
-
-    :hover {
-      border: 0.5px solid grey;
-    }
+    outline: none;
+    border-radius: 0;
+    width: 200px;
+    color: black;
   `}
 
   &[type=checkbox], &[type=radio] {
