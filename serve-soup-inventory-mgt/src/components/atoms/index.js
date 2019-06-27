@@ -12,3 +12,4 @@ export { default as DisplayText } from './DisplayText';
 export { default as SidebarText } from './SidebarText';
 export { default as LoaderContainer } from './Loader';
 export { default as SelectInput } from './SelectInput';
+export { default as Arrow } from './Arrow';
