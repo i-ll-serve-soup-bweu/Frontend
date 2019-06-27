@@ -3,11 +3,45 @@ import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 
 import { doGetKitchen, doAddInventoryItem } from '../../../actions';
 import {
-  StyledInput, DisplayText, StyledButton,
+  StyledInput, DisplayText, StyledButton, SelectInput, StyledHeading,
 } from '../../atoms';
+
+const StyledItemFormContainer = styled.div`
+  margin-top: 16px;
+  padding-left: 10px;
+  width: 100%;
+`;
+
+const StyledRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledDisplayText = styled.div`
+  width: 150px;
+  text-align: right;
+  padding-right: 8px;
+`;
+
+const StyledItemName = styled.div`
+  margin-left: 40px;
+`;
+
+const StyledButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+`;
+
+const StyledBackText = styled.p`
+  margin-left: 40px;
+  color: grey;
+  cursor: pointer;
+`;
 
 const InventoryItemForm = ({
   doGetKitchen, doAddInventoryItem, kitchen, loadingKitchen, history,
@@ -16,7 +50,8 @@ const InventoryItemForm = ({
   const nameRef = React.createRef();
   const measurementRef = React.createRef();
   const categoryRef = React.createRef();
-  // const alertRef = React.createRef();
+  const alertRef = React.createRef();
+  const priceRef = React.createRef();
 
   const onAddInventoryItem = () => {
     const newItem = {
@@ -24,6 +59,7 @@ const InventoryItemForm = ({
       quantity: stockRef.current.value,
       measurement_unit: measurementRef.current.value,
       category: categoryRef.current.value,
+      price: priceRef.current.value,
       kitchen_id: kitchen.id,
     };
     doAddInventoryItem(newItem, history);
@@ -45,24 +81,36 @@ const InventoryItemForm = ({
   }
 
   return (
-    <div>
-      <div>
+    <StyledItemFormContainer>
+      <StyledBackText
+        onClick={history.goBack}
+      >
+        Back to Inventory
+      </StyledBackText>
+      <StyledItemName>
         <StyledInput
           heading
           placeholder="Item Name"
           ref={nameRef}
           defaultValue={'' || ''}
         />
-      </div>
-      <div>
-        <DisplayText primary>Stock Quantity</DisplayText>
+      </StyledItemName>
+      <StyledRow
+        style={{ marginTop: '15px' }}
+      >
+        <StyledDisplayText>
+          <DisplayText primary>Current Stock:</DisplayText>
+        </StyledDisplayText>
         <StyledInput
           small
           ref={stockRef}
           defaultValue={'' || ''}
+          style={{ marginRight: '8px' }}
         />
-        <select ref={measurementRef}>
-          {/* map through measurement units to render options */}
+        <SelectInput
+          medium
+          ref={measurementRef}
+        >
           <option>pounds</option>
           <option>cases</option>
           <option>grams</option>
@@ -70,45 +118,67 @@ const InventoryItemForm = ({
           <option>packages</option>
           <option>cans</option>
           <option>other...</option>
-        </select>
-      </div>
-      <div>
-        <DisplayText primary>Category</DisplayText>
-        <select ref={categoryRef}>
-          {/* map through measurement units to render options */}
+        </SelectInput>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Category:</DisplayText>
+        </StyledDisplayText>
+        <SelectInput
+          medium
+          ref={categoryRef}
+        >
           <option>Produce</option>
           <option>Dry Goods</option>
           <option>Dairy</option>
           <option>Canned Goods</option>
           <option>Other...</option>
-        </select>
-      </div>
-      {/* <StyledHeading tertiary>Out of stock behavior</StyledHeading>
-      <div>
-        <DisplayText primary>Alert when below</DisplayText>
+        </SelectInput>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Price per unit:</DisplayText>
+        </StyledDisplayText>
+        <StyledInput
+          medium
+          ref={priceRef}
+          defaultValue={'' || ''}
+        />
+      </StyledRow>
+      <StyledHeading
+        secondary
+        style={{ margin: '20px 35px' }}
+      >
+        Out of stock behavior:
+      </StyledHeading>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Alert below:</DisplayText>
+        </StyledDisplayText>
         <StyledInput
           small
           ref={alertRef}
           defaultValue="2"
         />
-        <span>units</span>
-      </div>
-      <div>
-        <DisplayText primary>Alert Behavior</DisplayText>
-        <select>
-      map through measurement units to render options
-      <option>Email Alert</option>
+        <DisplayText primary>units</DisplayText>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Alert Behavior:</DisplayText>
+        </StyledDisplayText>
+        <SelectInput large>
+          <option>Email Alert</option>
           <option>Text Alert</option>
           <option>Add to re-order list</option>
           <option>Do Nothing</option>
           <option>Other...</option>
-        </select>
-      </div> */}
-      <div>
-        <StyledButton secondary onClick={onAddInventoryItem}>Save</StyledButton>
-        <StyledButton primary>Discard Item</StyledButton>
-      </div>
-    </div>
+        </SelectInput>
+      </StyledRow>
+      <StyledButtonsContainer>
+        <StyledButton save onClick={onAddInventoryItem}>Save</StyledButton>
+        <StyledButton discard>Discard Item</StyledButton>
+      </StyledButtonsContainer>
+    </StyledItemFormContainer>
   );
 };
 
@@ -120,7 +190,7 @@ const mapStateToProps = state => ({
 });
 
 export default
-connect(mapStateToProps, { doGetKitchen, doAddInventoryItem })(InventoryItemForm);
+  connect(mapStateToProps, { doGetKitchen, doAddInventoryItem })(InventoryItemForm);
 
 InventoryItemForm.defaultProps = {
   kitchen: undefined,

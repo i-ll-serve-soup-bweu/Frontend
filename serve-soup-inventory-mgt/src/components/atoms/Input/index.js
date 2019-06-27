@@ -6,6 +6,8 @@ const StyledInput = styled.input`
   outline: none;
   padding: 0 5px;
   margin: 5px 0;
+  height: 2.5em;
+  font-size: 1em;
 
   ${props => props.heading && css`
     border: 0;
@@ -17,6 +19,8 @@ const StyledInput = styled.input`
     border-radius: 0;
     width: 200px;
     color: black;
+    padding: 0;
+    height: 1.2em;
   `}
 
   &[type=checkbox], &[type=radio] {
@@ -36,7 +40,6 @@ const StyledInput = styled.input`
   }
 
   ${props => props.register && css`
-    height: 30px;
     width: 17em;
 
     :hover {
@@ -45,8 +48,7 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.small && css`
-    height: 1.8em;
-    width: 1.7em;
+    width: 3em;
 
     :hover {
       border: 0.5px solid grey;
@@ -54,8 +56,7 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.medium && css`
-    height: 1.8em;
-    width: 5em;
+    width:8em;
 
     :hover {
       border: 0.5px solid grey;
@@ -63,7 +64,6 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.large && css`
-    height: 1.8em;
     width: 10em;
 
     :hover {
