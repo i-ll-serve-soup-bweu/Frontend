@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
-import Loader from 'react-loader-spinner';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
 } from '../../../actions';
 import {
-  StyledInput, DisplayText, StyledButton,
+  StyledInput, DisplayText, StyledButton, LoaderContainer,
 } from '../../atoms';
 
 
@@ -68,12 +67,7 @@ const InventoryItemForm = ({
 
   if (loadingKitchen || loadingInventory) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text={loadingInventory ? 'loading inventory' : 'loading kitchen'} />
     );
   }
 

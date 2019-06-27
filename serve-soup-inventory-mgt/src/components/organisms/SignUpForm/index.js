@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
-import Loader from 'react-loader-spinner';
 
 import { doSignUp } from '../../../actions';
 import {
-  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput,
+  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput, LoaderContainer,
 } from '../../atoms';
 
 const Outer = styled.div`
@@ -49,12 +48,7 @@ const SignUpForm = ({
   };
   if (loadingUser) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="signing up..." />
     );
   }
 

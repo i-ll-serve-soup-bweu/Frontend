@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
-import Loader from 'react-loader-spinner';
 import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
 
 import { doGetInventory, doDeleteItem } from '../../../actions';
 import { Table } from '../../molecules';
 import {
-  TableCell, TableHead, TableRow, StyledInput, StyledHeading, StyledActionButton,
+  TableCell, TableHead, TableRow, StyledInput, StyledHeading, StyledActionButton, LoaderContainer,
 } from '../../atoms';
 
 
@@ -52,12 +51,7 @@ const DisplayInventory = ({
 
   if (loadingInventory) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="loading inventory..." />
     );
   }
 

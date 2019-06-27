@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
-import Loader from 'react-loader-spinner';
 
 import { doGetKitchen } from '../../../actions';
 import { CreateKitchenForm } from '../../organisms';
 import { ExternalTemplate } from '../../templates';
+import { LoaderContainer } from '../../atoms';
 
 function CreateKitchenPage({
   history, kitchen, doGetKitchen, loadingKitchen,
@@ -18,12 +18,7 @@ function CreateKitchenPage({
 
   if (loadingKitchen) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="loading kitchen..." />
     );
   }
   if (kitchen) {

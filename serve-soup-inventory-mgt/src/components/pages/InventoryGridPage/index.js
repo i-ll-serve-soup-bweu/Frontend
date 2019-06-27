@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { Redirect, Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
-import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { doGetKitchen } from '../../../actions';
-import { DisplayInventory, Sidebar, InventoryItemForm } from '../../organisms';
-import { StyledHeading, StyledActionButton } from '../../atoms';
+import { DisplayInventory, AppNav, Sidebar, InventoryItemForm } from '../../organisms';
+import { StyledHeading, StyledActionButton, LoaderContainer } from '../../atoms';
 import { DashboardTemplate } from '../../templates';
 
 const StyledInventoryGrid = styled.div`
@@ -37,12 +36,7 @@ function InventoryGrid({
 
   if (loadingKitchen) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="loading kitchen" />
     );
   }
 
