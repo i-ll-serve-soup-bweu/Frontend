@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import pt from 'prop-types';
+
+import { doLogOut } from '../../../actions';
+import { StyledButton } from '../../atoms';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -30,23 +35,37 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const Sidebar = () => (
-  <Wrapper>
-    <StyledNavLink
-      to="/notifications"
-      activeClassName="active"
-    >
-      <img src="https://image.flaticon.com/icons/svg/941/941593.svg" alt="notifications" />
+const Sidebar = ({ mobile, doLogOut }) => {
+  const logOut = () => {
+    doLogOut();
+    window.location.reload();
+  };
+  return (
+    <Wrapper>
+      <StyledNavLink
+        to="/notifications"
+        activeClassName="active"
+      >
+        <img src="https://image.flaticon.com/icons/svg/941/941593.svg" alt="notifications" />
       Notifications
-    </StyledNavLink>
-    <StyledNavLink
-      to="/inventory"
-      activeClassName="active"
-    >
-      <img src="https://image.flaticon.com/icons/svg/321/321769.svg" alt="inventory" />
+      </StyledNavLink>
+      <StyledNavLink
+        to="/inventory"
+        activeClassName="active"
+      >
+        <img src="https://image.flaticon.com/icons/svg/321/321769.svg" alt="inventory" />
       Inventory
-    </StyledNavLink>
-  </Wrapper>
-);
+      </StyledNavLink>
+      {
+        mobile 
+        && <StyledButton tertiary onClick={logOut}>Logout</StyledButton>
+      }
+    </Wrapper>
+  );
+};
 
-export default Sidebar;
+export default connect(null, { doLogOut })(Sidebar);
+
+Sidebar.propTypes = {
+  doLogOut: pt.func.isRequired,
+};
