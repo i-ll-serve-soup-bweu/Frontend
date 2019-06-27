@@ -8,20 +8,8 @@ import styled from 'styled-components';
 import { doGetInventory, doDeleteItem } from '../../../actions';
 import { Table } from '../../molecules';
 import {
-  TableCell, TableHead, TableRow, StyledInput, StyledHeading, StyledActionButton, LoaderContainer,
+  TableCell, TableHead, TableRow, StyledInput, LoaderContainer,
 } from '../../atoms';
-
-
-const StyledInventoryContainer = styled.div`
-  margin-top: 20px;
-  padding-left: 10px;
-`;
-
-const StyledHeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 const StyledBadge = styled.span`
   display: inline-block;
@@ -39,7 +27,7 @@ const StyledDelete = styled.img`
 `;
 
 const DisplayInventory = ({
-  inventory, kitchen, loadingInventory, doDeleteItem, doGetInventory, error, history,
+  inventory, kitchen, loadingInventory, doDeleteItem, doGetInventory, history,
 }) => {
   useEffect(() => {
     doGetInventory(kitchen.id);
@@ -67,51 +55,43 @@ const DisplayInventory = ({
     );
   }
   return (
-    <StyledInventoryContainer>
-      {
-        error && <p>{error}</p>
-      }
-      <StyledHeaderContainer>
-        <StyledHeading secondary>Inventory</StyledHeading>
-        <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
-      </StyledHeaderContainer>
-      <Table>
-        <thead>
-          <TableRow>
-            <TableHead><StyledInput type="checkbox" /></TableHead>
-            <TableHead>Item Name</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead />
-          </TableRow>
-        </thead>
-        <tbody>
-          {
-            inventory.map(item => (
-              <TableRow key={item.id}>
-                <TableCell><StyledInput type="radio" /></TableCell>
-                <TableCell>
-                  {`${item.item_name}`}
-                  {!item.quantity ? (<StyledBadge>Out of Stock</StyledBadge>) : ''}
-                </TableCell>
-                <TableCell>{`${item.quantity} ${item.measurement_unit}`}</TableCell>
-                <TableCell>{item.category}</TableCell>
-                <TableCell>
-                  <Link to={`/inventory/${item.id}`}>Click</Link>
-                </TableCell>
-                <TableCell>
-                  <StyledDelete
-                    onClick={() => onDeleteItem(item.id)}
-                    src="https://image.flaticon.com/icons/svg/1214/1214594.svg"
-                    alt="delete"
-                  />
-                </TableCell>
-              </TableRow>
-            ))
-          }
-        </tbody>
-      </Table>
-    </StyledInventoryContainer>
+
+    <Table>
+      <thead>
+        <TableRow>
+          <TableHead><StyledInput type="checkbox" /></TableHead>
+          <TableHead>Item Name</TableHead>
+          <TableHead>Stock</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead />
+        </TableRow>
+      </thead>
+      <tbody>
+        {
+          inventory.map(item => (
+            <TableRow key={item.id}>
+              <TableCell><StyledInput type="radio" /></TableCell>
+              <TableCell>
+                {`${item.item_name}`}
+                {!item.quantity ? (<StyledBadge>Out of Stock</StyledBadge>) : ''}
+              </TableCell>
+              <TableCell>{`${item.quantity} ${item.measurement_unit}`}</TableCell>
+              <TableCell>{item.category}</TableCell>
+              <TableCell>
+                <Link to={`/inventory/${item.id}`}>Click</Link>
+              </TableCell>
+              <TableCell>
+                <StyledDelete
+                  onClick={() => onDeleteItem(item.id)}
+                  src="https://image.flaticon.com/icons/svg/1214/1214594.svg"
+                  alt="delete"
+                />
+              </TableCell>
+            </TableRow>
+          ))
+        }
+      </tbody>
+    </Table>
   );
 };
 
@@ -139,7 +119,6 @@ DisplayInventory.propTypes = {
     km_id: pt.number,
   }),
   inventory: pt.arrayOf(pt.object),
-  error: pt.string.isRequired,
   history: pt.shape(historyPropTypes).isRequired,
   loadingInventory: pt.bool.isRequired,
   doGetInventory: pt.func.isRequired,

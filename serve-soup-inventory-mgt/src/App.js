@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PrivateRoute from './components/PrivateRoute';
-import { Sidebar, DisplayInventory, InventoryItemForm } from './components/organisms';
+import { Sidebar, InventoryItemForm } from './components/organisms';
 import { LoginPage, SignUpPage, CreateKitchenPage } from './components/pages';
 import { DashboardTemplate } from './components/templates';
+import InventoryGridPage from './components/pages/InventoryGridPage';
 
 const StyledSidebar = styled.div`
   width: 200px;
@@ -42,7 +43,7 @@ function App() {
             <PrivateRoute
               exact
               path={['/', '/inventory']}
-              component={DisplayInventory}
+              component={InventoryGridPage}
             />
             <PrivateRoute
               exact

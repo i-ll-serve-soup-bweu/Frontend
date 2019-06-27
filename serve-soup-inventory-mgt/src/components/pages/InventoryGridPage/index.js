@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
-import { Redirect, Link, Route, Switch } from 'react-router-dom';
+import {
+  Redirect, Link,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import styled from 'styled-components';
 
 import { doGetKitchen } from '../../../actions';
-import { DisplayInventory, AppNav, Sidebar, InventoryItemForm } from '../../organisms';
+import {
+  DisplayInventory,
+} from '../../organisms';
 import { StyledHeading, StyledActionButton, LoaderContainer } from '../../atoms';
-import { DashboardTemplate } from '../../templates';
-
-const StyledInventoryGrid = styled.div`
-  margin: 0 5rem;
-`;
 
 const StyledHeaderContainer = styled.div`
   display: flex;
@@ -19,12 +18,9 @@ const StyledHeaderContainer = styled.div`
   align-items: center;
 `;
 
-const StyledSidebar = styled.div`
-  width: 200px;
-`;
-
-const StyledDashboardContent = styled.div`
-  width: 600px;
+const StyledInventoryContainer = styled.div`
+  margin-top: 20px;
+  padding-left: 10px;
 `;
 
 function InventoryGrid({
@@ -50,44 +46,17 @@ function InventoryGrid({
 
   return (
     <div>
-      <DashboardTemplate>
-        <StyledSidebar>
-          <Sidebar />
-        </StyledSidebar>
-        <StyledDashboardContent>
-          <Switch>
-            <Route
-              exact
-              path="/inventory"
-              component={DisplayInventory}
-            />
-            <Route
-              exact
-              path="/inventory/:id"
-              component={InventoryItemForm}
-            />
-            <Route
-              exact
-              path="/inventory/add-item"
-              component={InventoryItemForm}
-            />
-          </Switch>
-        </StyledDashboardContent>
-      </DashboardTemplate>
+      <StyledInventoryContainer>
+        {
+        error && <p>{error}</p>
+       }
+        <StyledHeaderContainer>
+          <StyledHeading secondary>Inventory</StyledHeading>
+          <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+        </StyledHeaderContainer>
+        <DisplayInventory history={history} />
+      </StyledInventoryContainer>
     </div>
-    // <div>
-    //   <AppNav loggedIn />
-    //  <StyledInventoryGrid>
-    //    {
-    //     error && <p>{error}</p>
-    //    }
-    //    <StyledHeaderContainer>
-    //      <StyledHeading>Inventory</StyledHeading>
-    //      <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
-    //    </StyledHeaderContainer>
-    //   <DisplayInventory history={history} />
-    //  </StyledInventoryGrid>
-    // </div>
   );
 }
 
