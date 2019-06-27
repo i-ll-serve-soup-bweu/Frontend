@@ -7,8 +7,8 @@ const StyledLogoText = styled.h1`
   content: "I'll Serve Soup";
 
   @media (max-width: 760px) {
-    font-size: 2rem;
-    padding: 15px;
+    font-size: 1.5rem;
+    padding: 15px 0;
   }
 `;
 

@@ -12,6 +12,9 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   margin: 20px auto;
+  @media (max-width: 760px) {
+    margin: 0;
+  }
 `;
 
 const ExternalTemplate = ({ children }) => (

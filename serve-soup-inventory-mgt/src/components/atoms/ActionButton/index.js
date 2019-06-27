@@ -5,7 +5,7 @@ const StyledActionButton = styled.button`
   border-radius: 50%;
   border: none;
   color: white;
-  padding: .2rem 1.2rem .8rem 1.2rem;
+  padding: .2rem 1.2rem .2rem 1.2rem;
   text-align: center;
   text-decoration: none;
   box-shadow: 0 3px 5px rgba(0,0,0,.3);

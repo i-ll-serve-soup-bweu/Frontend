@@ -31,7 +31,7 @@ const StyledButton = styled.button`
   ${props => props.withoutBorder && css`
     background: none;
     color: black;
-    font-size: 0.6em;
+    font-size: 0.8em;
     border: none;
     padding: 0;
     margin: 0;

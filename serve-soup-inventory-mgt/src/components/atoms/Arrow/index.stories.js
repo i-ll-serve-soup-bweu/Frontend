@@ -4,4 +4,5 @@ import { storiesOf } from "@storybook/react";
 import Arrow from '.';
 
 storiesOf('Arrow', module)
-  .add('right', () => <Arrow right />);
+  .add('right', () => <Arrow right />)
+  .add('back', () => <Arrow left />);

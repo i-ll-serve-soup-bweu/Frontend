@@ -19,4 +19,12 @@ storiesOf('SelectInput', module)
       <option>Grapes</option>
       <option>Oranges</option>
     </SelectInput>
+  ))
+  .add('large', () => (
+    <SelectInput large>
+      <option>Apples</option>
+      <option>Bananas</option>
+      <option>Grapes</option>
+      <option>Oranges</option>
+    </SelectInput>
   ));

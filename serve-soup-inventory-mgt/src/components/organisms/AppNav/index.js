@@ -161,7 +161,12 @@ const AppNav = ({ doLogOut }) => {
               <StyledLink
                 to="/login"
               >
-                <StyledButton withoutBorder>Sign in</StyledButton>
+                <StyledButton
+                  withoutBorder
+                  style={{ marginRight: '7px' }}
+                >
+                  Sign in
+                </StyledButton>
               </StyledLink>
               <StyledLink
                 to="/signup"
