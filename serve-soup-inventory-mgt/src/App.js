@@ -9,55 +9,57 @@ import { DashboardTemplate } from './components/templates';
 import InventoryGridPage from './components/pages/InventoryGridPage';
 
 const StyledSidebar = styled.div`
-  width: 200px;
+  width: 25%;
 `;
 
 const StyledDashboardContent = styled.div`
-  width: 600px;
+  width: 75%;
 `;
 
 function App() {
   return (
     <Router>
-      <Route
-        exact
-        path="/login"
-        component={LoginPage}
-      />
-      <Route
-        exact
-        path="/signup"
-        component={SignUpPage}
-      />
-      <PrivateRoute
-        exact
-        path="/kitchen/create"
-        component={CreateKitchenPage}
-      />
-      <DashboardTemplate>
-        <StyledSidebar>
-          <Sidebar />
-        </StyledSidebar>
-        <StyledDashboardContent>
-          <Switch>
-            <PrivateRoute
-              exact
-              path={['/', '/inventory']}
-              component={InventoryGridPage}
-            />
-            <PrivateRoute
-              exact
-              path="/inventory/:id"
-              component={InventoryItemForm}
-            />
-            <PrivateRoute
-              exact
-              path="/inventory/add-item"
-              component={InventoryItemForm}
-            />
-          </Switch>
-        </StyledDashboardContent>
-      </DashboardTemplate>
+      <Switch>
+        <Route
+          exact
+          path="/login"
+          component={LoginPage}
+        />
+        <Route
+          exact
+          path="/signup"
+          component={SignUpPage}
+        />
+        <PrivateRoute
+          exact
+          path="/kitchen/create"
+          component={CreateKitchenPage}
+        />
+        <DashboardTemplate>
+          <StyledSidebar>
+            <Sidebar />
+          </StyledSidebar>
+          <StyledDashboardContent>
+            <Switch>
+              <PrivateRoute
+                exact
+                path={['/', '/inventory']}
+                component={InventoryGridPage}
+              />
+              <PrivateRoute
+                exact
+                path="/inventory/:id"
+                component={InventoryItemForm}
+              />
+              <PrivateRoute
+                exact
+                path="/inventory/add-item"
+                component={InventoryItemForm}
+              />
+            </Switch>
+          </StyledDashboardContent>
+        </DashboardTemplate>
+      </Switch>
     </Router>
   );
 }

@@ -50,6 +50,11 @@ function InventoryGrid({
         {
         error && <p>{error}</p>
        }
+
+        <StyledHeaderContainer>
+          <StyledHeading Primary>Inventory</StyledHeading>
+          <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+        </StyledHeaderContainer>
         <DisplayInventory history={history} />
       </StyledInventoryContainer>
     </div>

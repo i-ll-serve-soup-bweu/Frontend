@@ -10,23 +10,26 @@ import { StyledLogoText, StyledButton } from '../../atoms';
 const StyledNavContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
   background-color: white;
-  box-shadow: 0 8px 6px -10px black;
-  line-height: 3;
-  padding: 0 60px;
+  box-shadow: 0 0 4px rgba(0,0,0,.6);
+  padding: 0 5rem;
+  align-items: stretch;
+  min-width: 960px;
+  z-index: 4;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: #B0B0B0;
   text-align: center;
-  font-size: 12px;
-  width: 100px;
+  font-size: .8rem;
+  border-bottom: 3px solid;
   font-weight: bold;
   &.active {
     color: #79AC48;
@@ -42,14 +45,16 @@ const StyledAuthNav = styled.div`
 
 const StyledMiddleNav = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  align-items: center;
+  a {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+  }
 `;
 
 const StyledRightNav = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 10%;
 `;
 
 const AppNav = ({ loggedIn, doLogOut }) => {
@@ -73,7 +78,7 @@ const AppNav = ({ loggedIn, doLogOut }) => {
           <>
             <StyledMiddleNav>
               <StyledNavLink
-                to="/"
+                to="/inventory"
               >
                 INVENTORY
               </StyledNavLink>
@@ -89,7 +94,6 @@ const AppNav = ({ loggedIn, doLogOut }) => {
               </StyledNavLink>
             </StyledMiddleNav>
             <StyledRightNav>
-              <span>|</span>
               <StyledButton tertiary onClick={logOut}>Logout</StyledButton>
             </StyledRightNav>
           </>

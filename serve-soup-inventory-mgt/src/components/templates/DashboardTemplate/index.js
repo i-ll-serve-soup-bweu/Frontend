@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  margin: 20px auto;
+  margin: 0 5rem;
   display: flex;
   justify-content: column;
 `;
