@@ -29,7 +29,7 @@ const StyledDashboardContent = styled.div`
 `;
 
 function InventoryGrid({
-  doGetKitchen, kitchen, loadingKitchen, error,
+  doGetKitchen, kitchen, loadingKitchen, error, history,
 }) {
   useEffect(() => {
     doGetKitchen();
@@ -83,16 +83,16 @@ function InventoryGrid({
     </div>
     // <div>
     //   <AppNav loggedIn />
-    //   <StyledInventoryGrid>
-    //     {
-    //       error && <p>{error}</p>
-    //     }
-    //     <StyledHeaderContainer>
-    //       <StyledHeading>Inventory</StyledHeading>
-    //       <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
-    //     </StyledHeaderContainer>
-    //     <DisplayInventory />
-    //   </StyledInventoryGrid>
+    //  <StyledInventoryGrid>
+    //    {
+    //     error && <p>{error}</p>
+    //    }
+    //    <StyledHeaderContainer>
+    //      <StyledHeading>Inventory</StyledHeading>
+    //      <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+    //    </StyledHeaderContainer>
+    //   <DisplayInventory history={history} />
+    //  </StyledInventoryGrid>
     // </div>
   );
 }

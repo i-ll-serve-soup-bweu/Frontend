@@ -5,7 +5,9 @@ import { history as historyPropTypes } from 'history-prop-types';
 import Loader from 'react-loader-spinner';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { doGetKitchen, doAddInventoryItem, doUpdateInventoryItem } from '../../../actions';
+import {
+  doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
+} from '../../../actions';
 import {
   StyledInput, DisplayText, StyledButton,
 } from '../../atoms';
@@ -15,6 +17,7 @@ const InventoryItemForm = ({
   doGetKitchen,
   doAddInventoryItem,
   doUpdateInventoryItem,
+  doDeleteItem,
   kitchen,
   inventory,
   loadingKitchen,
@@ -38,6 +41,10 @@ const InventoryItemForm = ({
     };
     if (action === 'add') doAddInventoryItem(newItem, history);
     else doUpdateInventoryItem(newItem, id, history);
+  };
+
+  const onDeleteItem = (id) => {
+    doDeleteItem(id, kitchen.id, history);
   };
 
   useEffect(() => {
@@ -139,7 +146,10 @@ const InventoryItemForm = ({
         >
           Save
         </StyledButton>
-        <StyledButton primary>Discard Item</StyledButton>
+        {
+          isUpdate
+          && <StyledButton primary onClick={() => onDeleteItem(id)}>Discard Item</StyledButton>
+        }
       </div>
     </div>
   );
@@ -155,7 +165,7 @@ const mapStateToProps = state => ({
 export default
 connect(mapStateToProps,
   {
-    doGetKitchen, doAddInventoryItem, doUpdateInventoryItem,
+    doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
   })(InventoryItemForm);
 
 InventoryItemForm.defaultProps = {
@@ -167,6 +177,7 @@ InventoryItemForm.propTypes = {
   doGetKitchen: pt.func.isRequired,
   doAddInventoryItem: pt.func.isRequired,
   doUpdateInventoryItem: pt.func.isRequired,
+  doDeleteItem: pt.func.isRequired,
   inventory: pt.arrayOf(pt.object),
   kitchen: pt.shape({
     id: pt.number,
