@@ -8,7 +8,7 @@ const StyledDisplayText = styled.p`
   `}
 
   ${props => props.primary && css`
-    font-size: 12px;
+    font-size: 1.2em;
   `}
 `;
 

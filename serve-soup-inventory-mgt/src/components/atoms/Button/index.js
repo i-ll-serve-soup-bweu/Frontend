@@ -35,6 +35,22 @@ const StyledButton = styled.button`
     padding: 0;
     margin: 0;
   `}
+
+  ${props => props.save && css`
+    background: #8DBD53;
+    color: white;
+    font-size: 1.1em;
+    padding: 0.5em 2em;
+    width: 12em;
+  `}
+
+  ${props => props.discard && css`
+    color: #8DBD53;
+    font-size: 1.1em;
+    padding: 0.8em 2em;
+    font-size: 0.8em;
+    width: 12em;
+  `}
 `;
 
 export default StyledButton;
