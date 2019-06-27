@@ -9,7 +9,7 @@ import {
   StyledInput, DisplayText, StyledButton,
 } from '../../atoms';
 
-const InventoryItemDetailForm = ({
+const InventoryItemForm = ({
   doGetKitchen, doAddInventoryItem, kitchen, loadingKitchen, history,
 }) => {
   const stockRef = React.createRef();
@@ -120,13 +120,13 @@ const mapStateToProps = state => ({
 });
 
 export default
-connect(mapStateToProps, { doGetKitchen, doAddInventoryItem })(InventoryItemDetailForm);
+connect(mapStateToProps, { doGetKitchen, doAddInventoryItem })(InventoryItemForm);
 
-InventoryItemDetailForm.defaultProps = {
+InventoryItemForm.defaultProps = {
   kitchen: undefined,
 };
 
-InventoryItemDetailForm.propTypes = {
+InventoryItemForm.propTypes = {
   doGetKitchen: pt.func.isRequired,
   doAddInventoryItem: pt.func.isRequired,
   kitchen: pt.shape({
