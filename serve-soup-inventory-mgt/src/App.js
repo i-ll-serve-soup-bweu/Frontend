@@ -7,9 +7,14 @@ import { Sidebar, InventoryItemForm } from './components/organisms';
 import { LoginPage, SignUpPage, CreateKitchenPage } from './components/pages';
 import { DashboardTemplate } from './components/templates';
 import InventoryGridPage from './components/pages/InventoryGridPage';
+import Premium from './components/pages/Premium';
 
 const StyledSidebar = styled.div`
   width: 25%;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 
 const StyledDashboardContent = styled.div`
@@ -55,6 +60,21 @@ function App() {
                 exact
                 path="/inventory/add-item"
                 component={InventoryItemForm}
+              />
+              <PrivateRoute
+                exact
+                path="/notifications"
+                component={() => <Premium text="Notification" />}
+              />
+              <PrivateRoute
+                exact
+                path="/orders"
+                component={() => <Premium text="Orders" />}
+              />
+              <PrivateRoute
+                exact
+                path="/donations"
+                component={() => <Premium text="Donation" />}
               />
             </Switch>
           </StyledDashboardContent>
