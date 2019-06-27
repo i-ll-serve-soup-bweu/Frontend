@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import {
@@ -71,7 +70,7 @@ const InventoryItemForm = ({
       quantity: stockRef.current.value,
       measurement_unit: measurementRef.current.value,
       category: categoryRef.current.value,
-      price: priceRef.current.value,
+      // price: priceRef.current.value,
       kitchen_id: kitchen.id,
     };
     if (action === 'add') doAddInventoryItem(newItem, history);
@@ -205,14 +204,14 @@ const InventoryItemForm = ({
       </StyledRow>
       <StyledButtonsContainer>
         <StyledButton
-          secondary
+          save
           onClick={isUpdate ? () => onAddUpdateInventoryItem('update', id) : () => onAddUpdateInventoryItem('add')}
         >
           Save
         </StyledButton>
         {
           isUpdate
-          && <StyledButton primary onClick={() => onDeleteItem(id)}>Discard Item</StyledButton>
+          && <StyledButton discard onClick={() => onDeleteItem(id)}>Discard Item</StyledButton>
         }
       </StyledButtonsContainer>
     </StyledItemFormContainer>
