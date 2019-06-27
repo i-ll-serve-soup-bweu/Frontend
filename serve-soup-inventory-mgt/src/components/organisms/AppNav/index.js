@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import pt from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
+import { doLogOut } from '../../../actions';
 import { StyledLogoText, StyledButton } from '../../atoms';
 
 const StyledNavContainer = styled.div`
@@ -38,16 +41,22 @@ const StyledRightNav = styled.div`
   width: 70%;
 `;
 
-const AppNav = ({ loggedIn }) => (
-  <StyledNavContainer>
-    {/* <div /> */}
-    <StyledLink
-      to="/"
-    >
-      <StyledLogoText>I&apos;ll Serve Soup</StyledLogoText>
-    </StyledLink>
+const AppNav = ({ loggedIn, doLogOut }) => {
+  const logOut = () => {
+    doLogOut();
+    window.location.reload();
+  };
 
-    {
+  return (
+    <StyledNavContainer>
+      {/* <div /> */}
+      <StyledLink
+        to="/"
+      >
+        <StyledLogoText>I&apos;ll Serve Soup</StyledLogoText>
+      </StyledLink>
+
+      {
       loggedIn
         ? (
           <StyledRightNav>
@@ -67,7 +76,7 @@ const AppNav = ({ loggedIn }) => (
               Donations
             </StyledNavLink>
             <span>|</span>
-            <div>profile</div>
+            <StyledButton tertiary onClick={logOut}>Logout</StyledButton>
           </StyledRightNav>
         )
         : (
@@ -85,7 +94,17 @@ const AppNav = ({ loggedIn }) => (
           </StyledAuthNav>
         )
     }
-  </StyledNavContainer>
-);
+    </StyledNavContainer>
+  );
+};
 
-export default AppNav;
+export default connect(null, { doLogOut })(AppNav);
+
+AppNav.defaultProps = {
+  loggedIn: undefined,
+};
+
+AppNav.propTypes = {
+  doLogOut: pt.func.isRequired,
+  loggedIn: pt.bool,
+};
