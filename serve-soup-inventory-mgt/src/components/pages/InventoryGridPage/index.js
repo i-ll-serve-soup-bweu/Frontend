@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { doGetKitchen } from '../../../actions';
-import { DisplayInventory, AppNav } from '../../organisms';
+import { DisplayInventory, Sidebar, InventoryItemForm } from '../../organisms';
 import { StyledHeading, StyledActionButton } from '../../atoms';
+import { DashboardTemplate } from '../../templates';
 
 const StyledInventoryGrid = styled.div`
   margin: 0 5rem;
@@ -17,6 +18,14 @@ const StyledHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const StyledSidebar = styled.div`
+  width: 200px;
+`;
+
+const StyledDashboardContent = styled.div`
+  width: 600px;
 `;
 
 function InventoryGrid({
@@ -47,18 +56,44 @@ function InventoryGrid({
 
   return (
     <div>
-      <AppNav loggedIn />
-      <StyledInventoryGrid>
-        {
-          error && <p>{error}</p>
-        }
-        <StyledHeaderContainer>
-          <StyledHeading>Inventory</StyledHeading>
-          <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
-        </StyledHeaderContainer>
-        <DisplayInventory />
-      </StyledInventoryGrid>
+      <DashboardTemplate>
+        <StyledSidebar>
+          <Sidebar />
+        </StyledSidebar>
+        <StyledDashboardContent>
+          <Switch>
+            <Route
+              exact
+              path="/inventory"
+              component={DisplayInventory}
+            />
+            <Route
+              exact
+              path="/inventory/:id"
+              component={InventoryItemForm}
+            />
+            <Route
+              exact
+              path="/inventory/add-item"
+              component={InventoryItemForm}
+            />
+          </Switch>
+        </StyledDashboardContent>
+      </DashboardTemplate>
     </div>
+    // <div>
+    //   <AppNav loggedIn />
+    //   <StyledInventoryGrid>
+    //     {
+    //       error && <p>{error}</p>
+    //     }
+    //     <StyledHeaderContainer>
+    //       <StyledHeading>Inventory</StyledHeading>
+    //       <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
+    //     </StyledHeaderContainer>
+    //     <DisplayInventory />
+    //   </StyledInventoryGrid>
+    // </div>
   );
 }
 
