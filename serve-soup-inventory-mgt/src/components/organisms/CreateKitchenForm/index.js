@@ -25,6 +25,11 @@ const Inner = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 12px 0;
+`;
+
+const InputField = styled(StyledInput)`
+  margin: 9px 0;
 `;
 
 const CreateKitchenForm = ({
@@ -58,17 +63,17 @@ const CreateKitchenForm = ({
           </StyledHeading>
           <HorizontalBar width="100%" />
           <Form>
-            <StyledInput
+            <InputField
               register
               placeholder="Kitchen Name"
               ref={kitchenName}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Location"
               ref={location}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Description"
               ref={description}

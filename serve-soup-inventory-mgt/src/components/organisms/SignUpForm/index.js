@@ -25,6 +25,11 @@ const Inner = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 12px 0;
+`;
+
+const InputField = styled(StyledInput)`
+  margin: 9px 0;
 `;
 
 const SignUpForm = ({
@@ -59,27 +64,27 @@ const SignUpForm = ({
           <StyledHeading>Join</StyledHeading>
           <HorizontalBar width="100%" />
           <Form>
-            <StyledInput
+            <InputField
               register
               placeholder="First Name"
               ref={nameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Last Name"
               ref={lastNameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Email"
               ref={emailRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Confirm Email"
               ref={lastNameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Password"
               type="password"

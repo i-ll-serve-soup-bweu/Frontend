@@ -12,14 +12,15 @@ const StyledButton = styled.button`
 
   ${props => props.primary && css`
     font-size: 0.8em;
-    padding: 0.45em 7em;
+    font-weight: bold;
+    padding: 1em 7em;
   `}
 
   ${props => props.secondary && css`
     background: #8DBD53;
     color: white;
     font-size: 0.8em;
-    padding: 0.4em 3.5em;
+    padding: 1em 7em;
   `}
 
   ${props => props.tertiary && css`
