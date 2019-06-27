@@ -1,16 +1,17 @@
 import React from 'react';
 import pt from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+import Auth from '../auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => (localStorage.getItem('soupUserToken') ? (
+    render={props => (Auth.isAuthenticated() ? (
       <Component {...props} />
     ) : (
       <Redirect to="/login" />
     ))
-        }
+      }
   />
 );
 

@@ -20,7 +20,7 @@ const StyledHeaderContainer = styled.div`
 `;
 
 function InventoryGrid({
-  doGetKitchen, kitchen, loadingKitchen, error,
+  doGetKitchen, kitchen, loadingKitchen, error, history,
 }) {
   useEffect(() => {
     doGetKitchen();
@@ -56,7 +56,7 @@ function InventoryGrid({
           <StyledHeading>Inventory</StyledHeading>
           <Link to="/inventory/add-item"><StyledActionButton>+</StyledActionButton></Link>
         </StyledHeaderContainer>
-        <DisplayInventory />
+        <DisplayInventory history={history} />
       </StyledInventoryGrid>
     </div>
   );
