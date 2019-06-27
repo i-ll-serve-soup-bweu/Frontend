@@ -6,17 +6,21 @@ const StyledInput = styled.input`
   outline: none;
   padding: 0 5px;
   margin: 5px 0;
+  height: 2.5em;
+  font-size: 1em;
 
   ${props => props.heading && css`
-    border: none;
+    border: 0;
     display: inline-block;
-    border-bottom: 0.5px solid black;
-    font-size: 3rem;
+    border-bottom: 0.2px solid grey;
+    font-size: 1.7rem;
     font-weight: bold;
-
-    :hover {
-      border: 0.5px solid grey;
-    }
+    outline: none;
+    border-radius: 0;
+    width: 200px;
+    color: black;
+    padding: 0;
+    height: 1.2em;
   `}
 
   &[type=checkbox], &[type=radio] {
@@ -36,7 +40,6 @@ const StyledInput = styled.input`
   }
 
   ${props => props.register && css`
-    height: 30px;
     width: 17em;
 
     :hover {
@@ -45,8 +48,7 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.small && css`
-    height: 1.8em;
-    width: 1.7em;
+    width: 3em;
 
     :hover {
       border: 0.5px solid grey;
@@ -54,8 +56,7 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.medium && css`
-    height: 1.8em;
-    width: 5em;
+    width:8em;
 
     :hover {
       border: 0.5px solid grey;
@@ -63,12 +64,16 @@ const StyledInput = styled.input`
   `}
 
   ${props => props.large && css`
-    height: 1.8em;
     width: 10em;
 
     :hover {
       border: 0.5px solid grey;
     }
+  `}
+
+  ${props => props.disabled && css`
+    background: #e9e9e9;
+    cursor: not-allowed;
   `}
 `
 export default StyledInput;

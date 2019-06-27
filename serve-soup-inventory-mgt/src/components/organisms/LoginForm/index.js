@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import styled from 'styled-components';
-import Loader from 'react-loader-spinner';
 
 import { doLogIn } from '../../../actions';
 import {
-  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput,
+  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput, LoaderContainer,
 } from '../../atoms';
 
 const Outer = styled.div`
@@ -26,6 +25,11 @@ const Inner = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 12px 0;
+`;
+
+const InputField = styled(StyledInput)`
+  margin: 9px 0;
 `;
 
 const LoginForm = ({
@@ -44,12 +48,7 @@ const LoginForm = ({
   };
   if (loadingUser) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="signing in..." />
     );
   }
 
@@ -60,12 +59,12 @@ const LoginForm = ({
           <StyledHeading>Sign in</StyledHeading>
           <HorizontalBar width="100%" />
           <Form>
-            <StyledInput
+            <InputField
               register
               placeholder="Email"
               ref={emailRef}
             />
-            <StyledInput
+            <InputField
               register
               type="password"
               placeholder="Password"

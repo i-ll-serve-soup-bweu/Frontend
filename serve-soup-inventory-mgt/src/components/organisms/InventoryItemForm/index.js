@@ -2,17 +2,68 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
-import Loader from 'react-loader-spinner';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import styled from 'styled-components';
+import Tooltip from 'react-simple-tooltip';
 
 import {
   doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
 } from '../../../actions';
 import {
-  StyledInput, DisplayText, StyledButton,
+  StyledInput, DisplayText, StyledButton, LoaderContainer, SelectInput, StyledHeading, Arrow,
 } from '../../atoms';
 
-const InventoryItemDetailForm = ({
+const StyledItemFormContainer = styled.div`
+  margin-top: 16px;
+  padding-left: 10px;
+  width: 100%;
+
+  @media (max-width: 760px) {
+    padding-left: 0;
+  }
+`;
+
+const StyledRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledDisplayText = styled.div`
+  width: 150px;
+  text-align: right;
+  padding-right: 8px;
+  
+  @media (max-width: 760px) {
+    font-size: .8em;
+    width: 100px;
+  }
+`;
+
+const StyledItemName = styled.div`
+  margin-left: 40px;
+
+  @media (max-width: 760px) {
+    margin-left: 10px;
+  }
+`;
+
+const StyledButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+
+  @media (max-width: 760px) {
+    align-items: center;
+  }
+`;
+
+const StyledBackText = styled.p`
+  margin-left: 10px;
+  color: grey;
+  cursor: pointer;
+`;
+
+const InventoryItemForm = ({
   doGetKitchen,
   doAddInventoryItem,
   doUpdateInventoryItem,
@@ -28,7 +79,7 @@ const InventoryItemDetailForm = ({
   const nameRef = React.createRef();
   const measurementRef = React.createRef();
   const categoryRef = React.createRef();
-  // const alertRef = React.createRef();
+  const alertRef = React.createRef();
 
   const onAddUpdateInventoryItem = (action, id) => {
     const newItem = {
@@ -36,6 +87,7 @@ const InventoryItemDetailForm = ({
       quantity: stockRef.current.value,
       measurement_unit: measurementRef.current.value,
       category: categoryRef.current.value,
+      // price: priceRef.current.value,
       kitchen_id: kitchen.id,
     };
     if (action === 'add') doAddInventoryItem(newItem, history);
@@ -67,36 +119,45 @@ const InventoryItemDetailForm = ({
 
   if (loadingKitchen || loadingInventory) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text={loadingInventory ? 'loading inventory' : 'loading kitchen'} />
     );
   }
 
   const { id } = match.params;
   const isUpdate = !Number.isNaN(Number(id));
   return (
-    <div>
-      <div>
+    <StyledItemFormContainer>
+      <StyledBackText
+        onClick={history.goBack}
+      >
+        <Arrow left />
+        {' '}
+        Back to Inventory
+      </StyledBackText>
+      <StyledItemName>
         <StyledInput
           heading
           placeholder="Item Name"
           ref={nameRef}
           defaultValue={'' || ''}
         />
-      </div>
-      <div>
-        <DisplayText primary>Stock Quantity</DisplayText>
+      </StyledItemName>
+      <StyledRow
+        style={{ marginTop: '15px' }}
+      >
+        <StyledDisplayText>
+          <DisplayText primary>Current Stock:</DisplayText>
+        </StyledDisplayText>
         <StyledInput
           small
           ref={stockRef}
           defaultValue={'' || ''}
+          style={{ marginRight: '8px' }}
         />
-        <select ref={measurementRef}>
-          {/* map through measurement units to render options */}
+        <SelectInput
+          medium
+          ref={measurementRef}
+        >
           <option>pounds</option>
           <option>cases</option>
           <option>grams</option>
@@ -104,53 +165,76 @@ const InventoryItemDetailForm = ({
           <option>packages</option>
           <option>cans</option>
           <option>other...</option>
-        </select>
-      </div>
-      <div>
-        <DisplayText primary>Category</DisplayText>
-        <select ref={categoryRef}>
-          {/* map through measurement units to render options */}
+        </SelectInput>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Category:</DisplayText>
+        </StyledDisplayText>
+        <SelectInput
+          medium
+          ref={categoryRef}
+        >
           <option>Produce</option>
           <option>Dry Goods</option>
           <option>Dairy</option>
           <option>Canned Goods</option>
           <option>Other...</option>
-        </select>
-      </div>
-      {/* <StyledHeading tertiary>Out of stock behavior</StyledHeading>
-      <div>
-        <DisplayText primary>Alert when below</DisplayText>
+        </SelectInput>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Price per unit:</DisplayText>
+        </StyledDisplayText>
+        <Tooltip content="Available in Pro Version">
+          <StyledInput
+            disabled
+            medium
+          />
+        </Tooltip>
+      </StyledRow>
+      <StyledHeading
+        secondary
+        style={{ margin: '20px 35px' }}
+      >
+        Out of stock behavior:
+      </StyledHeading>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Alert below:</DisplayText>
+        </StyledDisplayText>
         <StyledInput
           small
           ref={alertRef}
           defaultValue="2"
         />
-        <span>units</span>
-      </div>
-      <div>
-        <DisplayText primary>Alert Behavior</DisplayText>
-        <select>
-      map through measurement units to render options
-      <option>Email Alert</option>
+        <DisplayText primary>units</DisplayText>
+      </StyledRow>
+      <StyledRow>
+        <StyledDisplayText>
+          <DisplayText primary>Alert Behavior:</DisplayText>
+        </StyledDisplayText>
+        <SelectInput large>
+          <option>Email Alert</option>
           <option>Text Alert</option>
           <option>Add to re-order list</option>
           <option>Do Nothing</option>
           <option>Other...</option>
-        </select>
-      </div> */}
-      <div>
+        </SelectInput>
+      </StyledRow>
+      <StyledButtonsContainer>
         <StyledButton
-          secondary
+          save
           onClick={isUpdate ? () => onAddUpdateInventoryItem('update', id) : () => onAddUpdateInventoryItem('add')}
         >
           Save
         </StyledButton>
         {
           isUpdate
-          && <StyledButton primary onClick={() => onDeleteItem(id)}>Discard Item</StyledButton>
+          && <StyledButton discard onClick={() => onDeleteItem(id)}>Discard Item</StyledButton>
         }
-      </div>
-    </div>
+      </StyledButtonsContainer>
+    </StyledItemFormContainer>
   );
 };
 
@@ -165,14 +249,14 @@ export default
 connect(mapStateToProps,
   {
     doGetKitchen, doAddInventoryItem, doUpdateInventoryItem, doDeleteItem,
-  })(InventoryItemDetailForm);
+  })(InventoryItemForm);
 
-InventoryItemDetailForm.defaultProps = {
+InventoryItemForm.defaultProps = {
   kitchen: undefined,
   inventory: undefined,
 };
 
-InventoryItemDetailForm.propTypes = {
+InventoryItemForm.propTypes = {
   doGetKitchen: pt.func.isRequired,
   doAddInventoryItem: pt.func.isRequired,
   doUpdateInventoryItem: pt.func.isRequired,

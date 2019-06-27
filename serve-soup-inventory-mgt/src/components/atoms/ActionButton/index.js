@@ -5,10 +5,11 @@ const StyledActionButton = styled.button`
   border-radius: 50%;
   border: none;
   color: white;
-  padding: 6px 10px;
+  padding: .2rem 1.2rem .8rem 1.2rem;
   text-align: center;
   text-decoration: none;
-  font-size: 14px;
+  box-shadow: 0 3px 5px rgba(0,0,0,.3);
+  font-size: 3rem;
   outline: none;
   cursor: pointer;
 `;

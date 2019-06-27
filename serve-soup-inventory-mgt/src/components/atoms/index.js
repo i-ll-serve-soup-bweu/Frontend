@@ -9,3 +9,7 @@ export { default as TableRow } from './TableRow';
 export { default as TableHead } from './TableHeader';
 export { default as TableCell } from './TableCell';
 export { default as DisplayText } from './DisplayText';
+export { default as SidebarText } from './SidebarText';
+export { default as LoaderContainer } from './Loader';
+export { default as SelectInput } from './SelectInput';
+export { default as Arrow } from './Arrow';

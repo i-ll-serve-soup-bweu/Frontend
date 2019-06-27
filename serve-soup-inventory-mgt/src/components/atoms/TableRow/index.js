@@ -4,7 +4,7 @@ const StyledTableRow = styled.tr`
   background-color: white;
   font-size: 13px;
   font-weight: 100;
-  cursor: pointer;
+  border-bottom: 1px solid #E8E8E8;
 
   :hover {
     background-color: #f5f5f5;

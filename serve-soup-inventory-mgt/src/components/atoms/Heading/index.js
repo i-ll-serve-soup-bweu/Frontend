@@ -15,5 +15,12 @@ const StyledHeading = styled.h1`
   ${props => props.tertiary && css`
     font-size: 1em;
   `}
-`
+
+  ${props => props.info && css`
+    margin-top: 20px;
+    font-size: 1em;
+    font-weight: 100;
+  `}
+`;
+
 export default StyledHeading;

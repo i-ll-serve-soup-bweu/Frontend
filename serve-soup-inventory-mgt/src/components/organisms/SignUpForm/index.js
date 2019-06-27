@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import pt from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
-import Loader from 'react-loader-spinner';
 
 import { doSignUp } from '../../../actions';
 import {
-  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput,
+  StyledButton, StyledRegisterCard, StyledHeading, HorizontalBar, StyledInput, LoaderContainer,
 } from '../../atoms';
 
 const Outer = styled.div`
@@ -26,6 +25,11 @@ const Inner = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 12px 0;
+`;
+
+const InputField = styled(StyledInput)`
+  margin: 9px 0;
 `;
 
 const SignUpForm = ({
@@ -49,12 +53,7 @@ const SignUpForm = ({
   };
   if (loadingUser) {
     return (
-      <Loader
-        type="Circles"
-        color="#8CBD53"
-        height="100"
-        width="100"
-      />
+      <LoaderContainer text="signing up..." />
     );
   }
 
@@ -65,27 +64,27 @@ const SignUpForm = ({
           <StyledHeading>Join</StyledHeading>
           <HorizontalBar width="100%" />
           <Form>
-            <StyledInput
+            <InputField
               register
               placeholder="First Name"
               ref={nameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Last Name"
               ref={lastNameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Email"
               ref={emailRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Confirm Email"
               ref={lastNameRef}
             />
-            <StyledInput
+            <InputField
               register
               placeholder="Password"
               type="password"
