@@ -43,7 +43,7 @@ const StyledDelete = styled.img`
 `;
 
 const DisplayInventory = ({
-  inventory, kitchen, loadingInventory, doDeleteItem, doGetInventory, history,
+  inventory, kitchen, loadingInventory, doDeleteItem, doGetInventory, error, history,
 }) => {
   useEffect(() => {
     doGetInventory(kitchen.id);
@@ -59,7 +59,17 @@ const DisplayInventory = ({
     );
   }
 
-
+  if (!inventory[0]) {
+    return (
+      <h3>
+        No Inventory Items added yet.
+        {' '}
+        <Link to="/inventory/add-item">Click here</Link>
+        {' '}
+        to add inventory items
+      </h3>
+    );
+  }
   return (
     <StyledDisplayInventoryContainer>
       <StyledHeaderContainer>
@@ -165,6 +175,7 @@ DisplayInventory.propTypes = {
     km_id: pt.number,
   }),
   inventory: pt.arrayOf(pt.object),
+  error: pt.string.isRequired,
   history: pt.shape(historyPropTypes).isRequired,
   loadingInventory: pt.bool.isRequired,
   doGetInventory: pt.func.isRequired,
