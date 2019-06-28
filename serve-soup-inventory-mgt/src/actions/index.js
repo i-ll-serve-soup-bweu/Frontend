@@ -14,7 +14,13 @@ export const LOADING_INVENTORY = 'LOADING_INVENTORY';
 export const ADD_INVENTORY_ITEM = 'ADD_INVENTORY_ITEM';
 export const UPDATE_INVENTORY_ITEM = 'UPDATE_INVENTORY_ITEM';
 export const DELETE_INVENTORY_ITEM = 'DELETE_INVENTORY_ITEM';
+export const FILTER_INVENTORY = 'FILTER_INVENTORY';
 export const ERROR = 'ERROR';
+
+export const filterInventory = category => ({
+  type: FILTER_INVENTORY,
+  payload: category,
+});
 
 export const signUpOrLogIn = user => ({
   type: LOGIN,
@@ -160,6 +166,17 @@ export const doDeleteItem = (id, kitchenId, history) => (dispatch) => {
     .then(() => {
       dispatch(deleteItem(id));
       history.push('/');
+    })
+    .catch(error => dispatch(genericAction(ERROR, error.message)))
+    .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
+};
+
+export const doFilterItem = (kitchenId, category) => (dispatch) => {
+  dispatch(genericAction(LOADING_INVENTORY, true));
+  axiosWithToken().get(`${SoupApiURL}/kitchen/${kitchenId}/item`)
+    .then((response) => {
+      dispatch(getInventory(response.data));
+      if (category) dispatch(filterInventory(category));
     })
     .catch(error => dispatch(genericAction(ERROR, error.message)))
     .finally(() => dispatch(genericAction(LOADING_INVENTORY, false)));
