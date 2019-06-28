@@ -22,6 +22,8 @@ export function inventoryReducer(state = initialState, action) {
       return { ...state, inventory: state.inventory.concat(action.payload), error: '' };
     case (types.DELETE_INVENTORY_ITEM):
       return { ...state, inventory: state.inventory.filter(item => item.id !== action.payload), error: '' };
+    case (types.FILTER_INVENTORY):
+      return { ...state, inventory: state.inventory.filter(item => item.category === action.payload), error: '' };
     case (types.ERROR):
       return { ...state, error: action.payload };
     default:
